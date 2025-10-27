@@ -1,0 +1,42 @@
+package com.pascal.kompasid.di
+
+import androidx.room.Room
+import com.pascal.kompasid.data.local.database.AppDatabase
+import com.pascal.kompasid.data.local.database.DatabaseConstants
+import com.pascal.kompasid.data.local.repository.LocalRepository
+import com.pascal.kompasid.data.local.repository.LocalRepositoryImpl
+import com.pascal.kompasid.data.repository.MovieRepository
+import com.pascal.kompasid.data.repository.MovieRepositoryImpl
+import com.pascal.kompasid.domain.usecase.local.LocalUseCase
+import com.pascal.kompasid.domain.usecase.local.LocalUseCaseImpl
+import com.pascal.kompasid.domain.usecase.movie.MovieUseCase
+import com.pascal.kompasid.domain.usecase.movie.MovieUseCaseImpl
+import com.pascal.kompasid.ui.screen.detail.DetailViewModel
+import com.pascal.kompasid.ui.screen.favorite.FavoriteViewModel
+import com.pascal.kompasid.ui.screen.home.HomeViewModel
+import com.pascal.kompasid.ui.screen.profile.ProfileViewModel
+import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
+
+val appModule = module {
+    single {
+        Room.databaseBuilder<AppDatabase>(
+            androidContext(), androidContext().getDatabasePath(DatabaseConstants.DB_NAME).absolutePath)
+            .setQueryCoroutineContext(Dispatchers.IO)
+            .build()
+    }
+
+    singleOf(::LocalRepositoryImpl) { bind<LocalRepository>() }
+    singleOf(::MovieRepositoryImpl) { bind<MovieRepository>() }
+
+    singleOf(::LocalUseCaseImpl) { bind<LocalUseCase>() }
+    singleOf(::MovieUseCaseImpl) { bind<MovieUseCase>() }
+
+    singleOf(::HomeViewModel)
+    singleOf(::FavoriteViewModel)
+    singleOf(::ProfileViewModel)
+    singleOf(::DetailViewModel)
+}
