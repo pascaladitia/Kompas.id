@@ -90,7 +90,7 @@ class HomeViewModel(
     }
 }
 
-enum class MovieTab(val title: String) {
+enum class NewsTab(val title: String) {
     FIRST("Berita Utama"),
     NEW("Terbaru"),
     CHOICE("Pilihanku"),
