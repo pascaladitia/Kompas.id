@@ -5,7 +5,6 @@ import com.pascal.kompasid.data.remote.dtos.ArticlesResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
 import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
 import com.pascal.kompasid.data.remote.dtos.HotTopicsResponse
-import com.pascal.kompasid.data.remote.dtos.IframeCampaignResponse
 import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import com.pascal.kompasid.domain.model.AdsBanner
@@ -17,7 +16,6 @@ import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.domain.model.Dashboard
 import com.pascal.kompasid.domain.model.FeaturedArticle
 import com.pascal.kompasid.domain.model.HotTopics
-import com.pascal.kompasid.domain.model.IframeCampaign
 import com.pascal.kompasid.domain.model.LiveReport
 import com.pascal.kompasid.domain.model.MainArticle
 import com.pascal.kompasid.domain.model.MoreReports
@@ -66,10 +64,6 @@ fun HotTopicsResponse.toDomain() = HotTopics(
             imageDescription = it.image_description.orEmpty()
         )
     }.orEmpty()
-)
-
-fun IframeCampaignResponse.toDomain() = IframeCampaign(
-    url = url.orEmpty()
 )
 
 fun CommonSectionResponse.toDomain(): CommonSection {

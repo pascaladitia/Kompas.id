@@ -6,7 +6,6 @@ import com.pascal.kompasid.data.remote.dtos.ArticlesResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
 import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
 import com.pascal.kompasid.data.remote.dtos.HotTopicsResponse
-import com.pascal.kompasid.data.remote.dtos.IframeCampaignResponse
 import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import org.koin.core.annotation.Single
@@ -24,6 +23,10 @@ class NewsRepositoryImpl(
         return api.getAdsBanner()
     }
 
+    override suspend fun getIframeCampaign(): AdsBannerResponse {
+        return api.getIframeCampaign()
+    }
+
     override suspend fun getArticles(): ArticlesResponse {
         return api.getArticles()
     }
@@ -34,10 +37,6 @@ class NewsRepositoryImpl(
 
     override suspend fun getHotTopics(): HotTopicsResponse {
         return api.getHotTopics()
-    }
-
-    override suspend fun getIframeCampaign(): IframeCampaignResponse {
-        return api.getIframeCampaign()
     }
 
     override suspend fun getLiveReport(): LiveReportResponse {

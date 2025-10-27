@@ -7,7 +7,6 @@ import com.pascal.kompasid.data.remote.dtos.ArticlesResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
 import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
 import com.pascal.kompasid.data.remote.dtos.HotTopicsResponse
-import com.pascal.kompasid.data.remote.dtos.IframeCampaignResponse
 import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import com.pascal.kompasid.utils.base.JsonReader
@@ -33,7 +32,7 @@ class KtorClientApi(private val context: Context) {
     suspend fun getHotTopics(): HotTopicsResponse =
         JsonReader.load(context, "hot_topics.json")
 
-    suspend fun getIframeCampaign(): IframeCampaignResponse =
+    suspend fun getIframeCampaign(): AdsBannerResponse =
         JsonReader.load(context, "iframe_campaign.json")
 
     suspend fun getKabinet(): CommonSectionResponse =

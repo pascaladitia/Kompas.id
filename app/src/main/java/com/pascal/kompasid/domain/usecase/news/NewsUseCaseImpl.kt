@@ -8,7 +8,6 @@ import com.pascal.kompasid.domain.model.BreakingNews
 import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.domain.model.Dashboard
 import com.pascal.kompasid.domain.model.HotTopics
-import com.pascal.kompasid.domain.model.IframeCampaign
 import com.pascal.kompasid.domain.model.LiveReport
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -27,6 +26,10 @@ class NewsUseCaseImpl(
         emit(repository.getAdsBanner().toDomain())
     }
 
+    override suspend fun getIframeCampaign(): Flow<AdsBanner> = flow {
+        emit(repository.getIframeCampaign().toDomain())
+    }
+
     override suspend fun getArticles(): Flow<List<Article>> = flow {
         emit(repository.getArticles().toDomain())
     }
@@ -37,10 +40,6 @@ class NewsUseCaseImpl(
 
     override suspend fun getHotTopics(): Flow<HotTopics> = flow {
         emit(repository.getHotTopics().toDomain())
-    }
-
-    override suspend fun getIframeCampaign(): Flow<IframeCampaign> = flow {
-        emit(repository.getIframeCampaign().toDomain())
     }
 
     override suspend fun getLiveReport(): Flow<LiveReport> = flow {
