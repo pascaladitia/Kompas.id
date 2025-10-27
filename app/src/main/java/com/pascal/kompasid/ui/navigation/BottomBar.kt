@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.pascal.kompasid.ui.theme.Neutral500
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Home
 import compose.icons.feathericons.User
@@ -31,7 +30,7 @@ fun BottomBar(
 ) {
     Box(
         modifier = modifier
-            .background(Neutral500)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         NavigationBar(
             containerColor = Color.Transparent,

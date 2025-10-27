@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
 fun ShimmerAnimation() {
@@ -70,7 +70,7 @@ fun ShimmerItem(modifier: Modifier = Modifier, brush: Brush) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun ShimmerPreview() {
-    MovieTheme {
+    AppTheme {
         ShimmerAnimation()
     }
 }

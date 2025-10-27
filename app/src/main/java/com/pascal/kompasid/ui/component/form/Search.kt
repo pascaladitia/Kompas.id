@@ -31,7 +31,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Search
 
@@ -108,7 +108,7 @@ fun Search(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    MovieTheme {
+    AppTheme {
         Search() {
 
         }

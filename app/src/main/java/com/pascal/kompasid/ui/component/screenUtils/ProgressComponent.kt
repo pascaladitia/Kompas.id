@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
 fun ProgressComponent(
@@ -53,7 +53,7 @@ fun ProgressComponent(
 @Preview
 @Composable
 fun ProgressPreview() {
-    MovieTheme {
+    AppTheme {
         ProgressComponent(progress = 50f) {}
     }
 }

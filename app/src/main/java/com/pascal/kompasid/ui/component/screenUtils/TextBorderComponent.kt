@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
 fun TextBorderComponent(
@@ -131,7 +131,7 @@ fun TextSelectedComponent(
 @Preview
 @Composable
 fun TextBorderPreview() {
-    MovieTheme {
+    AppTheme {
         TextBorderComponent(text = "PTP")
     }
 }
@@ -139,7 +139,7 @@ fun TextBorderPreview() {
 @Preview
 @Composable
 fun TextSelectedPreview() {
-    MovieTheme {
+    AppTheme {
         TextSelectedComponent(text = "PTP", value = "14") {}
     }
 }

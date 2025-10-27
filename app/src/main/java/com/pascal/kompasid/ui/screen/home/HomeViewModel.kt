@@ -3,13 +3,13 @@ package com.pascal.kompasid.ui.screen.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pascal.kompasid.domain.usecase.local.LocalUseCase
-import com.pascal.kompasid.domain.usecase.movie.NewsUseCase
+import com.pascal.kompasid.domain.usecase.news.NewsUseCase
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -21,31 +21,71 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow(HomeUIState())
     val uiState: StateFlow<HomeUIState> = _uiState.asStateFlow()
 
-    fun loadDashboard() {
+    fun loadHomePartOne() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            newsUseCase.dashboard()
+
+            combine(
+                newsUseCase.getAdsBanner(),
+                newsUseCase.getArticles(),
+                newsUseCase.getBreakingNews(),
+                newsUseCase.getHotTopics()
+            ) { ads, articles, breaking, hot ->
+                _uiState.value.copy(
+                    isLoading = false,
+                    adsBanner = ads,
+                    articles = articles,
+                    breakingNews = breaking,
+                    hotTopics = hot
+                )
+            }
                 .catch { e ->
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            error = true to e.message.toString()
+                            error = true to (e.message ?: "Unknown error")
                         )
                     }
-
                 }
-                .collectLatest { data ->
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            dashboard = data
-                        )
-                    }
+                .collect { newState ->
+                    _uiState.update { newState }
                 }
         }
     }
 
-    fun setError(value: String) {
-        _uiState.update { it.copy(error = false to value) }
+    fun loadHomePartTwo() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+
+            combine(
+                newsUseCase.getIframeCampaign(),
+                newsUseCase.getKabinet(),
+                newsUseCase.getLiveReport(),
+                newsUseCase.getPonAcehSumut()
+            ) { iframe, kabinet, live, pon ->
+                _uiState.value.copy(
+                    isLoading = false,
+                    iframeCampaign = iframe,
+                    kabinet = kabinet,
+                    liveReport = live,
+                    ponAcehSumut = pon
+                )
+            }
+                .catch { e ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            error = true to (e.message ?: "Unknown error")
+                        )
+                    }
+                }
+                .collect { newState ->
+                    _uiState.update { newState }
+                }
+        }
+    }
+
+    fun resetError() {
+        _uiState.update { it.copy(error = false to "") }
     }
 }

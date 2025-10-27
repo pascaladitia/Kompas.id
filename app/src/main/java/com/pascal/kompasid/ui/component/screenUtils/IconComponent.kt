@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.ArrowLeft
 
@@ -46,7 +46,7 @@ fun IconComponent(
 @Preview(showBackground = true)
 @Composable
 fun IconPreview() {
-    MovieTheme {
+    AppTheme {
         IconComponent() {}
     }
 }

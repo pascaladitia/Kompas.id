@@ -26,7 +26,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.pascal.kompasid.ui.component.button.ButtonComponent
 import com.pascal.kompasid.ui.component.button.ButtonOutlineComponent
 import com.pascal.kompasid.ui.component.form.FormPasswordComponent
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
 fun ShowDialog(
@@ -196,7 +196,7 @@ const val DIALOG_CHECKIN = 9
 @Preview(showBackground = true)
 @Composable
 fun DialogPreview() {
-    MovieTheme {
+    AppTheme {
         ShowDialog(message = "error message", textButton = "Tutup") {}
     }
 }
@@ -204,7 +204,7 @@ fun DialogPreview() {
 @Preview(showBackground = true)
 @Composable
 fun DialogChoicePreview() {
-    MovieTheme {
+    AppTheme {
         ShowChoiceDialog(message = "error message", textButton = "Keluar", onConfirm = {}, onCancel = {})
     }
 }
@@ -212,7 +212,7 @@ fun DialogChoicePreview() {
 @Preview(showBackground = true)
 @Composable
 fun DialogFormPreview() {
-    MovieTheme {
+    AppTheme {
         ShowFormDialog(textButton = "Keluar", onConfirm = {}, onCancel = {})
     }
 }

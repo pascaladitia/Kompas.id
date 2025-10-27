@@ -22,7 +22,7 @@ val Typography = Typography(
     ),
     headlineSmall = TextStyle(
         fontFamily = FontFamily(Font(R.font.inter)),
-        fontWeight = FontWeight.ExtraBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 24.sp
     ),
     titleLarge = TextStyle(
