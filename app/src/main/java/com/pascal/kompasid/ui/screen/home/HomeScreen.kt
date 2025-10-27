@@ -34,6 +34,8 @@ import com.pascal.kompasid.R
 import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
+import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
+import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 import kotlinx.coroutines.launch
@@ -71,13 +73,14 @@ fun HomeScreen(
             onDetail = onDetail
         )
     ) {
-        HomeContent()
+        HomeContent(uiState = uiState)
     }
 }
 
 @Composable
 fun HomeContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    uiState: HomeUIState = HomeUIState()
 ) {
     val event = LocalHomeEvent.current
     val coroutine = rememberCoroutineScope()
@@ -146,7 +149,7 @@ fun HomeContent(
             userScrollEnabled = false
         ) { page ->
             when (tabItems[page]) {
-                NewsTab.FIRST -> HomeFirstTab()
+                NewsTab.FIRST -> HomeFirstTab(uiState = uiState)
                 NewsTab.NEW -> HomeFirstTab()
                 NewsTab.CHOICE -> HomeFirstTab()
                 NewsTab.FREE -> HomeFirstTab()
@@ -158,14 +161,14 @@ fun HomeContent(
 
 @Composable
 fun HomeFirstTab(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    uiState: HomeUIState = HomeUIState()
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        item {
+        homeBreakingNews(uiState = uiState)
 
-        }
     }
 }
 

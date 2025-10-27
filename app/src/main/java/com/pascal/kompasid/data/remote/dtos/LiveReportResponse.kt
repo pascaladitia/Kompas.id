@@ -13,6 +13,7 @@ data class LiveReportResponse(
 
 @Serializable
 data class MainArticle(
+    val image: String? = null,
     val category: String? = null,
     val title: String? = null,
     val published_time: String? = null
@@ -32,5 +33,6 @@ data class MoreReports(
 
 @Serializable
 data class FeaturedArticle(
+    val image: String? = null,
     val title: String? = null
 )

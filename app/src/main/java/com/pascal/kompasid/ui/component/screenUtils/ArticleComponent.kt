@@ -1,0 +1,155 @@
+package com.pascal.kompasid.ui.component.screenUtils
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.pascal.kompasid.R
+import com.pascal.kompasid.ui.theme.AppTheme
+
+@Composable
+fun ArticleComponent(
+    modifier: Modifier = Modifier,
+    title: String? = null,
+    desc: String? = null,
+    time: String? = null,
+    image: String? = null,
+    action: Boolean = true,
+    isCenter: Boolean = false,
+    showDivider: Boolean = true,
+    onShareClick: () -> Unit = {},
+    onBookmarkClick: () -> Unit = {},
+    onAudioClick: () -> Unit = {}
+) {
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        if (showDivider) HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row {
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    title?.let {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                color = MaterialTheme.colorScheme.onSurface
+                            ),
+                            textAlign = if (isCenter) TextAlign.Center else null
+                        )
+                    }
+
+                    Spacer(Modifier.height(8.dp))
+
+                    desc?.let {
+                        Text(
+                            text = desc,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            ),
+                            textAlign = if (isCenter) TextAlign.Center else null
+                        )
+                    }
+                }
+
+                image?.let {
+                    DynamicAsyncImage(
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .size(100.dp),
+                        imageUrl = image,
+                        placeholder = painterResource(R.drawable.no_thumbnail),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
+
+            if (action) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        time?.let {
+                            Text(
+                                text = time,
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            )
+                        }
+                    }
+
+                    Icon(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .clickable { onShareClick() }
+                            .size(42.dp),
+                        painter = painterResource(R.drawable.ic_share),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .clickable { onBookmarkClick() }
+                            .size(42.dp),
+                        painter = painterResource(R.drawable.ic_bookmark),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .clickable { onShareClick() }
+                            .size(42.dp),
+                        painter = painterResource(R.drawable.ic_audio),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ArticlePreview() {
+    AppTheme {
+        ArticleComponent(
+            title = "Lorem ipsum dolor sit amet",
+            desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            time = "10:00 AM",
+            image = "test"
+        )
+    }
+}

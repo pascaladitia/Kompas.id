@@ -10,6 +10,7 @@ data class CommonSectionResponse(
 
 @Serializable
 data class CommonArticle(
+    val image: String? = null,
     val title: String? = null,
     val label: String? = null,
     val description: String? = null,

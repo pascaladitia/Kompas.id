@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BreakingNewsResponse(
+    val image: String? = null,
     val headline: String? = null,
     val subheadline: String? = null,
     val published_time: String? = null,

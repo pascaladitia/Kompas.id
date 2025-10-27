@@ -9,6 +9,7 @@ data class LiveReport(
 )
 
 data class MainArticle(
+    val image: String,
     val category: String?,
     val title: String?,
     val publishedTime: String?
@@ -25,5 +26,6 @@ data class MoreReports(
 )
 
 data class FeaturedArticle(
+    val image: String,
     val title: String?
 )

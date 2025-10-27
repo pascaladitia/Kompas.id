@@ -13,17 +13,17 @@ val Typography = Typography(
     headlineLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.merriweather)),
         fontWeight = FontWeight.ExtraBold,
-        fontSize = 36.sp
+        fontSize = 28.sp
     ),
     headlineMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.merriweather)),
         fontWeight = FontWeight.ExtraBold,
-        fontSize = 28.sp
+        fontSize = 24.sp
     ),
     headlineSmall = TextStyle(
         fontFamily = FontFamily(Font(R.font.merriweather)),
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
+        fontSize = 20.sp
     ),
     titleLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.roboto)),

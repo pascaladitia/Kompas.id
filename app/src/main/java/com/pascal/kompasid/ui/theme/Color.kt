@@ -3,12 +3,12 @@ package com.pascal.kompasid.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // ==================== Light Colors ====================
-internal val PrimaryLight = Color(0xFF0A84FF)
+internal val PrimaryLight = Color(0xFF00559A)
 internal val OnPrimaryLight = Color(0xFFFFFFFF)
 internal val PrimaryContainerLight = Color(0xFFFFE0B2)
 internal val OnPrimaryContainerLight = Color(0xFF4E342E)
 
-internal val SecondaryLight = Color(0x410A84FF)
+internal val SecondaryLight = Color(0x8000559A)
 internal val OnSecondaryLight = Color(0xFFFFFFFF)
 internal val SecondaryContainerLight = Color(0xFFD7CCC8)
 internal val OnSecondaryContainerLight = Color(0xFF3E2723)
@@ -49,12 +49,12 @@ internal val SurfaceContainerHighestLight = Color(0xFFE9E9E9)
 
 
 // ==================== Dark Colors (disesuaikan) ====================
-internal val PrimaryDark = Color(0xFF0A84FF)
+internal val PrimaryDark = Color(0xFF00559A)
 internal val OnPrimaryDark = Color(0xFFFFFFFF)
 internal val PrimaryContainerDark = Color(0xFF004080)
 internal val OnPrimaryContainerDark = Color(0xFFFFFFFF)
 
-internal val SecondaryDark = Color(0x668CBFFF)
+internal val SecondaryDark = Color(0x8000559A)
 internal val OnSecondaryDark = Color(0xFFFFFFFF)
 internal val SecondaryContainerDark = Color(0xFF3E2723)
 internal val OnSecondaryContainerDark = Color(0xFFD7CCC8)

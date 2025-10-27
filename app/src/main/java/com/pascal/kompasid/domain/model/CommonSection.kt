@@ -6,6 +6,7 @@ data class CommonSection(
 )
 
 data class CommonArticle(
+    val image: String,
     val title: String,
     val label: String?,
     val description: String?,

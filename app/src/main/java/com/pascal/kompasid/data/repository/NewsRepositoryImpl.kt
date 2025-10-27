@@ -2,10 +2,8 @@ package com.pascal.kompasid.data.repository
 
 import com.pascal.kompasid.data.remote.api.KtorClientApi
 import com.pascal.kompasid.data.remote.dtos.AdsBannerResponse
-import com.pascal.kompasid.data.remote.dtos.ArticlesResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
 import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
-import com.pascal.kompasid.data.remote.dtos.HotTopicsResponse
 import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import org.koin.core.annotation.Single
@@ -27,7 +25,7 @@ class NewsRepositoryImpl(
         return api.getIframeCampaign()
     }
 
-    override suspend fun getArticles(): ArticlesResponse {
+    override suspend fun getArticles(): CommonSectionResponse {
         return api.getArticles()
     }
 
@@ -35,7 +33,7 @@ class NewsRepositoryImpl(
         return api.getBreakingNews()
     }
 
-    override suspend fun getHotTopics(): HotTopicsResponse {
+    override suspend fun getHotTopics(): CommonSectionResponse {
         return api.getHotTopics()
     }
 

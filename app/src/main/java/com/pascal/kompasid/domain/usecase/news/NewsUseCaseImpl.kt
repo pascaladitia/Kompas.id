@@ -3,11 +3,9 @@ package com.pascal.kompasid.domain.usecase.news
 import com.pascal.kompasid.data.repository.NewsRepositoryImpl
 import com.pascal.kompasid.domain.mapper.toDomain
 import com.pascal.kompasid.domain.model.AdsBanner
-import com.pascal.kompasid.domain.model.Article
 import com.pascal.kompasid.domain.model.BreakingNews
 import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.domain.model.Dashboard
-import com.pascal.kompasid.domain.model.HotTopics
 import com.pascal.kompasid.domain.model.LiveReport
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -30,7 +28,7 @@ class NewsUseCaseImpl(
         emit(repository.getIframeCampaign().toDomain())
     }
 
-    override suspend fun getArticles(): Flow<List<Article>> = flow {
+    override suspend fun getArticles(): Flow<CommonSection> = flow {
         emit(repository.getArticles().toDomain())
     }
 
@@ -38,7 +36,7 @@ class NewsUseCaseImpl(
         emit(repository.getBreakingNews().toDomain())
     }
 
-    override suspend fun getHotTopics(): Flow<HotTopics> = flow {
+    override suspend fun getHotTopics(): Flow<CommonSection> = flow {
         emit(repository.getHotTopics().toDomain())
     }
 
