@@ -4,11 +4,10 @@ import com.pascal.kompasid.data.remote.api.KtorClientApi
 import com.pascal.kompasid.data.remote.dtos.AdsBannerResponse
 import com.pascal.kompasid.data.remote.dtos.ArticlesResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
+import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
 import com.pascal.kompasid.data.remote.dtos.HotTopicsResponse
 import com.pascal.kompasid.data.remote.dtos.IframeCampaignResponse
-import com.pascal.kompasid.data.remote.dtos.KabinetResponse
 import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
-import com.pascal.kompasid.data.remote.dtos.PonAcehSumutResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import org.koin.core.annotation.Single
 
@@ -41,15 +40,15 @@ class NewsRepositoryImpl(
         return api.getIframeCampaign()
     }
 
-    override suspend fun getKabinet(): KabinetResponse {
-        return api.getKabinet()
-    }
-
     override suspend fun getLiveReport(): LiveReportResponse {
         return api.getLiveReport()
     }
 
-    override suspend fun getPonAcehSumut(): PonAcehSumutResponse {
+    override suspend fun getKabinet(): CommonSectionResponse {
+        return api.getKabinet()
+    }
+
+    override suspend fun getPonAcehSumut(): CommonSectionResponse {
         return api.getPonAcehSumut()
     }
 }

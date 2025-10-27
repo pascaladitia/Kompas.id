@@ -5,12 +5,11 @@ import com.pascal.kompasid.domain.mapper.toDomain
 import com.pascal.kompasid.domain.model.AdsBanner
 import com.pascal.kompasid.domain.model.Article
 import com.pascal.kompasid.domain.model.BreakingNews
+import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.domain.model.Dashboard
 import com.pascal.kompasid.domain.model.HotTopics
 import com.pascal.kompasid.domain.model.IframeCampaign
-import com.pascal.kompasid.domain.model.Kabinet
 import com.pascal.kompasid.domain.model.LiveReport
-import com.pascal.kompasid.domain.model.PonAcehSumut
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Single
@@ -44,15 +43,15 @@ class NewsUseCaseImpl(
         emit(repository.getIframeCampaign().toDomain())
     }
 
-    override suspend fun getKabinet(): Flow<Kabinet> = flow {
-        emit(repository.getKabinet().toDomain())
-    }
-
     override suspend fun getLiveReport(): Flow<LiveReport> = flow {
         emit(repository.getLiveReport().toDomain())
     }
 
-    override suspend fun getPonAcehSumut(): Flow<PonAcehSumut> = flow {
+    override suspend fun getKabinet(): Flow<CommonSection> = flow {
+        emit(repository.getKabinet().toDomain())
+    }
+
+    override suspend fun getPonAcehSumut(): Flow<CommonSection> = flow {
         emit(repository.getPonAcehSumut().toDomain())
     }
 }

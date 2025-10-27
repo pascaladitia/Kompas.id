@@ -5,11 +5,10 @@ import com.pascal.kompasid.data.remote.client
 import com.pascal.kompasid.data.remote.dtos.AdsBannerResponse
 import com.pascal.kompasid.data.remote.dtos.ArticlesResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
+import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
 import com.pascal.kompasid.data.remote.dtos.HotTopicsResponse
 import com.pascal.kompasid.data.remote.dtos.IframeCampaignResponse
-import com.pascal.kompasid.data.remote.dtos.KabinetResponse
 import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
-import com.pascal.kompasid.data.remote.dtos.PonAcehSumutResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import com.pascal.kompasid.utils.base.JsonReader
 import io.ktor.client.call.body
@@ -37,12 +36,12 @@ class KtorClientApi(private val context: Context) {
     suspend fun getIframeCampaign(): IframeCampaignResponse =
         JsonReader.load(context, "iframe_campaign.json")
 
-    suspend fun getKabinet(): KabinetResponse =
+    suspend fun getKabinet(): CommonSectionResponse =
         JsonReader.load(context, "kabinet.json")
 
     suspend fun getLiveReport(): LiveReportResponse =
         JsonReader.load(context, "live_report.json")
 
-    suspend fun getPonAcehSumut(): PonAcehSumutResponse =
+    suspend fun getPonAcehSumut(): CommonSectionResponse =
         JsonReader.load(context, "pon_aceh_sumut.json")
 }

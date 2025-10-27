@@ -66,8 +66,8 @@ class HomeViewModel(
                 _uiState.value.copy(
                     isLoading = false,
                     iframeCampaign = iframe,
-                    kabinet = kabinet,
                     liveReport = live,
+                    kabinet = kabinet,
                     ponAcehSumut = pon
                 )
             }
