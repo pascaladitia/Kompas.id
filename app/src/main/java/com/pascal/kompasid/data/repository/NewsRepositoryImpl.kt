@@ -6,9 +6,9 @@ import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import org.koin.core.annotation.Single
 
 @Single
-class MovieRepositoryImpl(
+class NewsRepositoryImpl(
     private val localDataSource: LocalRepositoryImpl,
-) : MovieRepository {
+) : NewsRepository {
     override suspend fun dashboard(): DashboardResponse {
         return KtorClientApi.dashboard()
     }

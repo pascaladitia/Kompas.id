@@ -5,12 +5,12 @@ import com.pascal.kompasid.data.local.database.AppDatabase
 import com.pascal.kompasid.data.local.database.DatabaseConstants
 import com.pascal.kompasid.data.local.repository.LocalRepository
 import com.pascal.kompasid.data.local.repository.LocalRepositoryImpl
-import com.pascal.kompasid.data.repository.MovieRepository
-import com.pascal.kompasid.data.repository.MovieRepositoryImpl
+import com.pascal.kompasid.data.repository.NewsRepository
+import com.pascal.kompasid.data.repository.NewsRepositoryImpl
 import com.pascal.kompasid.domain.usecase.local.LocalUseCase
 import com.pascal.kompasid.domain.usecase.local.LocalUseCaseImpl
-import com.pascal.kompasid.domain.usecase.movie.MovieUseCase
-import com.pascal.kompasid.domain.usecase.movie.MovieUseCaseImpl
+import com.pascal.kompasid.domain.usecase.movie.NewsUseCase
+import com.pascal.kompasid.domain.usecase.movie.NewsUseCaseImpl
 import com.pascal.kompasid.ui.screen.detail.DetailViewModel
 import com.pascal.kompasid.ui.screen.favorite.FavoriteViewModel
 import com.pascal.kompasid.ui.screen.home.HomeViewModel
@@ -30,10 +30,10 @@ val appModule = module {
     }
 
     singleOf(::LocalRepositoryImpl) { bind<LocalRepository>() }
-    singleOf(::MovieRepositoryImpl) { bind<MovieRepository>() }
+    singleOf(::NewsRepositoryImpl) { bind<NewsRepository>() }
 
     singleOf(::LocalUseCaseImpl) { bind<LocalUseCase>() }
-    singleOf(::MovieUseCaseImpl) { bind<MovieUseCase>() }
+    singleOf(::NewsUseCaseImpl) { bind<NewsUseCase>() }
 
     singleOf(::HomeViewModel)
     singleOf(::FavoriteViewModel)
