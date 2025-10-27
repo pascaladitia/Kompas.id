@@ -89,3 +89,11 @@ class HomeViewModel(
         _uiState.update { it.copy(error = false to "") }
     }
 }
+
+enum class MovieTab(val title: String) {
+    FIRST("Berita Utama"),
+    NEW("Terbaru"),
+    CHOICE("Pilihanku"),
+    FREE("Bebas"),
+    FAVORITE("Favorit Pembaca"),
+}
