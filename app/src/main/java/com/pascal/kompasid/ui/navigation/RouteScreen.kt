@@ -34,7 +34,9 @@ fun RouteScreen(
         bottomBar = {
             if (currentRoute in listOf(
                     Screen.HomeScreen.route,
-                    Screen.FavoriteScreen.route,
+                    Screen.EPaperScreen.route,
+                    Screen.TTSScreen.route,
+                    Screen.BookScreen.route,
                     Screen.ProfileScreen.route
                 )) {
                 BottomBar(navController)
@@ -61,33 +63,37 @@ fun RouteScreen(
                 composable(route = Screen.HomeScreen.route) {
                     HomeScreen(
                         paddingValues = paddingValues,
-                        onDetail = {
-
-                        }
+                        onDetail = {}
                     )
                 }
                 composable(route = Screen.DetailScreen.route) {
                     DetailScreen(
                         paddingValues = paddingValues,
-                        onDetail = {
-
-                        }
+                        onDetail = {}
                     )
                 }
-                composable(route = Screen.FavoriteScreen.route) {
+                composable(route = Screen.EPaperScreen.route) {
                     FavoriteScreen(
                         paddingValues = paddingValues,
-                        onDetail = {
-
-                        }
+                        onDetail = {}
+                    )
+                }
+                composable(route = Screen.TTSScreen.route) {
+                    FavoriteScreen(
+                        paddingValues = paddingValues,
+                        onDetail = {}
+                    )
+                }
+                composable(route = Screen.BookScreen.route) {
+                    FavoriteScreen(
+                        paddingValues = paddingValues,
+                        onDetail = {}
                     )
                 }
                 composable(route = Screen.ProfileScreen.route) {
                     ProfileScreen(
                         paddingValues = paddingValues,
-                        onDetail = {
-
-                        }
+                        onDetail = {}
                     )
                 }
             }

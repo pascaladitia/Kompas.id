@@ -55,19 +55,19 @@ fun BottomBar(
                     title = "ePaper",
                     iconFilled = Icons.AutoMirrored.Filled.MenuBook,
                     iconOutlined = Icons.AutoMirrored.Outlined.MenuBook,
-                    screen = Screen.FavoriteScreen
+                    screen = Screen.EPaperScreen
                 ),
                 NavigationItem(
                     title = "TTS",
                     iconFilled = Icons.Filled.Dashboard,
                     iconOutlined = Icons.Outlined.Dashboard,
-                    screen = Screen.FavoriteScreen
+                    screen = Screen.TTSScreen
                 ),
                 NavigationItem(
                     title = "Buku",
                     iconFilled = Icons.Filled.Book,
                     iconOutlined = Icons.Outlined.Book,
-                    screen = Screen.FavoriteScreen
+                    screen = Screen.BookScreen
                 ),
                 NavigationItem(
                     title = "Profile",
