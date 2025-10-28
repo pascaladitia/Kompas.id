@@ -39,10 +39,13 @@ fun ArticleComponent(
     showDivider: Boolean = true,
     onShareClick: () -> Unit = {},
     onBookmarkClick: () -> Unit = {},
-    onAudioClick: () -> Unit = {}
+    onAudioClick: () -> Unit = {},
+    onItemClick: () -> Unit = {}
 ) {
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onItemClick() }
     ) {
         if (showDivider) HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 
@@ -102,7 +105,7 @@ fun ArticleComponent(
                             Text(
                                 text = time,
                                 style = MaterialTheme.typography.bodySmall.copy(
-                                    color = MaterialTheme.colorScheme.onSurface
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             )
                         }
@@ -131,7 +134,7 @@ fun ArticleComponent(
                     Icon(
                         modifier = Modifier
                             .clip(CircleShape)
-                            .clickable { onShareClick() }
+                            .clickable { onAudioClick() }
                             .size(42.dp),
                         painter = painterResource(R.drawable.ic_audio),
                         contentDescription = null,

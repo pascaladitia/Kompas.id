@@ -151,10 +151,10 @@ fun HomeContent(
         ) { page ->
             when (tabItems[page]) {
                 NewsTab.FIRST -> HomeFirstTab(uiState = uiState)
-                NewsTab.NEW -> HomeFirstTab()
-                NewsTab.CHOICE -> HomeFirstTab()
-                NewsTab.FREE -> HomeFirstTab()
-                NewsTab.FAVORITE -> HomeFirstTab()
+                NewsTab.NEW -> HomeFirstTab(uiState = uiState)
+                NewsTab.CHOICE -> HomeFirstTab(uiState = uiState)
+                NewsTab.FREE -> HomeFirstTab(uiState = uiState)
+                NewsTab.FAVORITE -> HomeFirstTab(uiState = uiState)
             }
         }
     }

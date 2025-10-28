@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
 import com.pascal.kompasid.domain.model.LiveReport
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
+import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleTimeline
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
@@ -41,11 +42,6 @@ fun LazyListScope.homeLiveReport(
                 .fillMaxWidth()
         ) {
             Box {
-                TextBorderComponent(
-                    modifier = Modifier.padding(8.dp),
-                    text = item.reportType
-                )
-
                 DynamicAsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -54,6 +50,11 @@ fun LazyListScope.homeLiveReport(
                     placeholder = painterResource(R.drawable.no_thumbnail),
                     contentDescription = null,
                     contentScale = ContentScale.Crop
+                )
+
+                TextBorderComponent(
+                    modifier = Modifier.padding(8.dp),
+                    text = item.reportType
                 )
             }
 
@@ -95,6 +96,13 @@ fun LazyListScope.homeLiveReport(
             time = article.publishedTime.orEmpty(),
             title = article.title.orEmpty(),
             showDot = index != item.relatedArticles.lastIndex
+        )
+    }
+
+    item {
+        ArticleSection(
+            label = item.moreReports?.label.orEmpty(),
+            value = item.moreReports?.count.orEmpty()
         )
     }
 
