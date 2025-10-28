@@ -47,7 +47,12 @@ fun ArticleComponent(
             .fillMaxWidth()
             .clickable { onItemClick() }
     ) {
-        if (showDivider) HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+        if (showDivider) {
+            HorizontalDivider(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                color = MaterialTheme.colorScheme.outline
+            )
+        }
 
         Column(
             modifier = Modifier
@@ -105,7 +110,7 @@ fun ArticleComponent(
                             Text(
                                 text = time,
                                 style = MaterialTheme.typography.bodySmall.copy(
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    color = MaterialTheme.colorScheme.inverseOnSurface
                                 )
                             )
                         }

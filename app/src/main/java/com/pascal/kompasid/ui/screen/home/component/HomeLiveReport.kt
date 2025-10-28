@@ -64,7 +64,7 @@ fun LazyListScope.homeLiveReport(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = item.mainArticle?.category.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium.copy(
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.error
                 )
             )
 
@@ -84,7 +84,7 @@ fun LazyListScope.homeLiveReport(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = item.mainArticle?.publishedTime.orEmpty(),
                 style = MaterialTheme.typography.bodySmall.copy(
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.inverseOnSurface
                 )
             )
         }

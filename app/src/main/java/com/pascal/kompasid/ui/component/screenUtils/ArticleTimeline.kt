@@ -82,7 +82,7 @@ fun ArticleTimeline(
             Text(
                 text = time,
                 style = MaterialTheme.typography.bodySmall.copy(
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.inverseOnSurface
                 )
             )
 
