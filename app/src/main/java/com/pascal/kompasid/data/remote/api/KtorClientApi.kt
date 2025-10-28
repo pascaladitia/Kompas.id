@@ -57,4 +57,37 @@ class KtorClientApi(private val context: Context) {
     suspend fun getVideo(): CommonSectionResponse =
         JsonReader.load(context, "video.json")
 
+    suspend fun getLiked(): CommonSectionResponse =
+        JsonReader.load(context, "liked.json")
+
+    suspend fun getLitbang(): CommonSectionResponse =
+        JsonReader.load(context, "riset_litbang.json")
+
+    suspend fun getInvestigasi(): CommonSectionResponse =
+        JsonReader.load(context, "investigasi.json")
+
+    suspend fun getPolitikHukum(): CommonSectionResponse =
+        JsonReader.load(context, "politik_hukum.json")
+
+    suspend fun getEkonomi(): CommonSectionResponse =
+        JsonReader.load(context, "ekonomi.json")
+
+    suspend fun getInternasional(): CommonSectionResponse =
+        JsonReader.load(context, "internasional.json")
+
+    suspend fun getOlahraga(): CommonSectionResponse =
+        JsonReader.load(context, "olahraga.json")
+
+    suspend fun getMultimedia(): CommonSectionResponse =
+        JsonReader.load(context, "multimedia.json")
+
+    suspend fun getCerpen(): CommonSectionResponse =
+        JsonReader.load(context, "cerpen.json")
+
+    suspend fun getMoreArticle(): CommonSectionResponse =
+        JsonReader.load(context, "more_articles.json")
+
+    suspend fun getMoreArticle2(): CommonSectionResponse =
+        JsonReader.load(context, "more_article2.json")
+
 }

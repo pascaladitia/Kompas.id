@@ -46,7 +46,18 @@ class NewsRepositoryImpl(
             api.getOpini(),
             api.getBrief(),
             api.getRedaksi(),
-            api.getVideo()
+            api.getVideo(),
+            api.getLiked(),
+            api.getLitbang(),
+            api.getInvestigasi(),
+            api.getPolitikHukum(),
+            api.getEkonomi(),
+            api.getInternasional(),
+            api.getOlahraga(),
+            api.getMultimedia(),
+            api.getCerpen(),
+            api.getMoreArticle(),
+            api.getMoreArticle2()
         )
     }
 }

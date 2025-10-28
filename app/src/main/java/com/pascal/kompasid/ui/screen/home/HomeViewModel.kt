@@ -96,5 +96,6 @@ enum class Category(val title: String) {
     BRIEF("Brief"),
     VISUAL("Visual"),
     VIDEO("Video"),
+    ROW("Row"),
     MULTIMEDIA("Multimedia")
 }

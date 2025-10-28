@@ -37,6 +37,8 @@ import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
 import com.pascal.kompasid.ui.screen.home.component.HomeBanner
 import com.pascal.kompasid.ui.screen.home.component.HomeBriefArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeCommonArticles
+import com.pascal.kompasid.ui.screen.home.component.HomeMultimediaArticles
+import com.pascal.kompasid.ui.screen.home.component.HomeRowArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeVideosArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeVisualArticles
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
@@ -194,6 +196,12 @@ fun HomeFirstTab(
                     }
                     Category.VIDEO.title -> {
                         HomeVideosArticles(item = item)
+                    }
+                    Category.ROW.title -> {
+                        HomeRowArticles(item = item)
+                    }
+                    Category.MULTIMEDIA.title -> {
+                        HomeMultimediaArticles(item = item)
                     }
                     else -> {
                         HomeCommonArticles(item = item)
