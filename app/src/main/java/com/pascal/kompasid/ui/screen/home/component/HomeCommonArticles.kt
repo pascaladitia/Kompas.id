@@ -80,6 +80,7 @@ fun HomeCommonArticles(
                 title = firstItem.title,
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
+                author = firstItem.author,
                 showDivider = false
             )
         }

@@ -93,20 +93,9 @@ fun ArticleComponent(
                         )
                     }
 
-                    Spacer(Modifier.height(8.dp))
-
-                    desc?.let {
-                        Text(
-                            text = desc,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            ),
-                            textAlign = if (isCenter) TextAlign.Center else null
-                        )
-                    }
-
                     author?.let { authorName ->
                         Text(
+                            modifier = Modifier.padding(top = 8.dp),
                             text = buildAnnotatedString {
                                 append("Oleh ")
                                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
@@ -116,6 +105,17 @@ fun ArticleComponent(
                             style = MaterialTheme.typography.bodySmall.copy(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
+                        )
+                    }
+                    
+                    desc?.let {
+                        Text(
+                            modifier = Modifier.padding(top = 8.dp),
+                            text = desc,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            ),
+                            textAlign = if (isCenter) TextAlign.Center else null
                         )
                     }
                 }

@@ -51,7 +51,7 @@ fun ArticleSection(
             modifier = Modifier.weight(1f),
             text = label,
             style = MaterialTheme.typography.titleMedium.copy(
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.primary
             )
         )
 

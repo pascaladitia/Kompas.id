@@ -39,7 +39,7 @@ internal val InverseSurfaceLight = Color(0xFF2F3131)
 internal val InverseOnSurfaceLight = Color(0xFF7A7A7A)
 internal val InversePrimaryLight = Color(0x800A84FF)
 
-internal val SurfaceDimLight = Color(0xFFFFB74B)
+internal val SurfaceDimLight = Color(0xFFEC9F2E)
 internal val SurfaceBrightLight = Color(0xFFB8B8B8)
 internal val SurfaceContainerLowestLight = Color(0xFFFFFFFF)
 internal val SurfaceContainerLowLight = Color(0xFFF7F7F7)

@@ -2,10 +2,15 @@ package com.pascal.kompasid.ui.screen.home.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
@@ -16,6 +21,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,11 +42,27 @@ fun LazyListScope.homeHotTopics(
     if (item == null) return
 
     item {
-        ArticleSection(
-            label = item.section,
-            isExclusive = true,
-            showIcon = false
-        )
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
+        ) {
+            VerticalDivider(
+                thickness = 4.dp,
+                color = MaterialTheme.colorScheme.surfaceDim,
+                modifier = Modifier.fillMaxHeight()
+            )
+
+            Spacer(Modifier.width(16.dp))
+
+            Text(
+                text = item.section,
+                style = MaterialTheme.typography.titleMedium.copy(
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            )
+        }
     }
 
     items(item.topics) { item ->
