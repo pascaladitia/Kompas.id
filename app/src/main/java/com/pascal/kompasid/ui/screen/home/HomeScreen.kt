@@ -35,6 +35,7 @@ import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
 import com.pascal.kompasid.ui.screen.home.component.homeArticles
+import com.pascal.kompasid.ui.screen.home.component.homeBanner
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
 import com.pascal.kompasid.ui.screen.home.component.homeCampaign
 import com.pascal.kompasid.ui.screen.home.component.homeHotTopics
@@ -182,6 +183,8 @@ fun HomeFirstTab(
         homeArticles(item = uiState.kabinet)
 
         homeArticles(item = uiState.ponAcehSumut)
+
+        homeBanner(item = uiState.adsBanner)
     }
 }
 

@@ -41,6 +41,13 @@ fun LazyListScope.homeArticles(
     if (item == null) return
 
     item {
+        HorizontalDivider(
+            thickness = 8.dp,
+            color = MaterialTheme.colorScheme.outline
+        )
+    }
+
+    item {
         Column(
             modifier = modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -110,13 +117,6 @@ fun LazyListScope.homeArticles(
         ArticleComponent(
             title = item.title,
             time = item.publishedTime
-        )
-    }
-
-    item {
-        HorizontalDivider(
-            thickness = 8.dp,
-            color = MaterialTheme.colorScheme.outline
         )
     }
 }
