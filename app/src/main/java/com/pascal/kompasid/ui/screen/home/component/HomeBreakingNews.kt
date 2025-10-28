@@ -17,15 +17,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
+import com.pascal.kompasid.domain.model.BreakingNews
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
-import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.theme.AppTheme
 
 fun LazyListScope.homeBreakingNews(
     modifier: Modifier = Modifier,
-    uiState: HomeUIState
+    item: BreakingNews? = null
 ) {
+    if (item == null) return
+
     item {
         Column(
             modifier = modifier
@@ -42,9 +44,9 @@ fun LazyListScope.homeBreakingNews(
             )
 
             ArticleComponent(
-                title = uiState.breakingNews?.headline,
-                desc = uiState.breakingNews?.subheadline,
-                time = uiState.breakingNews?.publishedTime,
+                title = item.headline,
+                desc = item.subheadline,
+                time = item.publishedTime,
                 isCenter = true,
                 showDivider = false
             )
@@ -54,14 +56,15 @@ fun LazyListScope.homeBreakingNews(
                     .padding(bottom = 16.dp)
                     .fillMaxWidth()
                     .height(200.dp),
-                imageUrl = uiState.breakingNews?.image.orEmpty(),
+                imageUrl = item.image,
+                placeholder = painterResource(R.drawable.no_thumbnail),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
         }
     }
 
-    items(uiState.breakingNews?.articles.orEmpty()) { item ->
+    items(item.articles) { item ->
         ArticleComponent(
             title = item.title,
             time = item.publishedTime
@@ -71,12 +74,10 @@ fun LazyListScope.homeBreakingNews(
 
 @Preview(showBackground = true)
 @Composable
-private fun HomeArticlesPreview() {
+private fun HomeBreakingNewsPreview() {
     AppTheme {
         LazyColumn {
-            homeBreakingNews(
-                uiState = HomeUIState()
-            )
+            homeBreakingNews()
         }
     }
 }

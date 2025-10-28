@@ -18,7 +18,7 @@ internal val OnTertiaryLight = Color(0xFFFFFFFF)
 internal val TertiaryContainerLight = Color(0xFFB2DFDB)
 internal val OnTertiaryContainerLight = Color(0xFF004D40)
 
-internal val ErrorLight = Color(0xFFD32F2F)
+internal val ErrorLight = Color(0xFFD00D12)
 internal val OnErrorLight = Color(0xFFFFFFFF)
 internal val ErrorContainerLight = Color(0xFFFFCDD2)
 internal val OnErrorContainerLight = Color(0xFF410002)
@@ -65,7 +65,7 @@ internal val TertiaryContainerDark = Color(0xFF004D40)
 internal val OnTertiaryContainerDark = Color(0xFFB2DFDB)
 
 internal val ErrorDark = Color(0xFFEF9A9A)
-internal val OnErrorDark = Color(0xFF4A0A0A)
+internal val OnErrorDark = Color(0xFFD00D12)
 internal val ErrorContainerDark = Color(0xFF8A1C1C)
 internal val OnErrorContainerDark = Color(0xFFFFDAD6)
 

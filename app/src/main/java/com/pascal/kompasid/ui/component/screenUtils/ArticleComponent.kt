@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -81,6 +82,7 @@ fun ArticleComponent(
                     DynamicAsyncImage(
                         modifier = Modifier
                             .padding(start = 16.dp)
+                            .clip(RoundedCornerShape(6.dp))
                             .size(100.dp),
                         imageUrl = image,
                         placeholder = painterResource(R.drawable.no_thumbnail),

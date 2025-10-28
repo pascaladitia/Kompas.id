@@ -35,6 +35,7 @@ import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
+import com.pascal.kompasid.ui.screen.home.component.homeLiveReport
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
@@ -167,8 +168,9 @@ fun HomeFirstTab(
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        homeBreakingNews(uiState = uiState)
+        homeBreakingNews(item = uiState.breakingNews)
 
+        homeLiveReport(item = uiState.liveReport)
     }
 }
 
