@@ -7,9 +7,11 @@ package com.pascal.kompasid.ui.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -45,8 +47,9 @@ fun RouteScreen(
     ) { paddingValues ->
         SharedTransitionLayout {
             NavHost(
+                modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding()),
                 navController = navController,
-                startDestination = Screen.SplashScreen.route
+                startDestination = Screen.SplashScreen.route,
             ) {
                 composable(route = Screen.SplashScreen.route) {
                     SplashScreen(

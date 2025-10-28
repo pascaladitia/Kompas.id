@@ -31,7 +31,7 @@ internal val OnSurfaceLight = Color(0xFF151515)
 internal val SurfaceVariantLight = Color(0xFFEAEAEA)
 internal val OnSurfaceVariantLight = Color(0xFF606060)
 
-internal val OutlineLight = Color(0xFFDCDCDC)
+internal val OutlineLight = Color(0xFFEAEAEA)
 internal val OutlineVariantLight = Color(0x80151515)
 internal val ScrimLight = Color(0xFF000000)
 

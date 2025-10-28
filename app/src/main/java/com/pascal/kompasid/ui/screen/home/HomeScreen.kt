@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
@@ -35,6 +36,7 @@ import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
+import com.pascal.kompasid.ui.screen.home.component.homeCampaign
 import com.pascal.kompasid.ui.screen.home.component.homeLiveReport
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
@@ -171,6 +173,8 @@ fun HomeFirstTab(
         homeBreakingNews(item = uiState.breakingNews)
 
         homeLiveReport(item = uiState.liveReport)
+
+        homeCampaign(item = uiState.iframeCampaign)
     }
 }
 
