@@ -208,8 +208,18 @@ fun HomeFirstTab(
                     }
                 }
 
-                if ((index + 1) % 4 == 0 && uiState.adsBanner != null) {
-                    HomeBanner(item = uiState.adsBanner)
+                if (uiState.adsBanner != null) {
+                    val position = index + 1
+
+                    val shouldShowBanner = when {
+                        position == 2 || position == 4 -> true
+                        position > 4 && (position - 4) % 3 == 0 -> true
+                        else -> false
+                    }
+
+                    if (shouldShowBanner) {
+                        HomeBanner(item = uiState.adsBanner)
+                    }
                 }
             }
         }
