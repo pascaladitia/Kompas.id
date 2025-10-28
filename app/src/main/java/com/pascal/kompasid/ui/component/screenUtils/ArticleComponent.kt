@@ -99,6 +99,8 @@ fun ArticleComponent(
                 }
             }
 
+            Spacer(Modifier.height(6.dp))
+
             if (action) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically

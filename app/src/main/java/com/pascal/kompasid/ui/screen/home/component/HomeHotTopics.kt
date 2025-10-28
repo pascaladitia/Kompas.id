@@ -91,8 +91,8 @@ fun HotTopicsItem(
         modifier = modifier
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             .fillMaxWidth()
-            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
-            .clip(RoundedCornerShape(16.dp))
+            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(10.dp))
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {

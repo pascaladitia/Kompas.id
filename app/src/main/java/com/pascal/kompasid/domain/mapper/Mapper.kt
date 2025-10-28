@@ -46,6 +46,7 @@ fun BreakingNewsResponse.toDomain() = BreakingNews(
 fun CommonSectionResponse.toDomain(): CommonSection {
     return CommonSection(
         section = this.section.orEmpty(),
+        isExclusive = this.isExclusive ?: false,
         articles = this.articles?.map {
             CommonArticle(
                 image = it.image.orEmpty(),

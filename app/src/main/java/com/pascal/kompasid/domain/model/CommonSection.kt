@@ -2,6 +2,7 @@ package com.pascal.kompasid.domain.model
 
 data class CommonSection(
     val section: String,
+    val isExclusive: Boolean,
     val articles: List<CommonArticle>,
     val topics: List<CommonArticle>
 )
