@@ -158,4 +158,8 @@ dependencies {
     // Chucker
     releaseImplementation(libs.chuckerReleaseNoOp)
     debugImplementation(libs.chuckerDebug)
+
+    // Exo
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
 }

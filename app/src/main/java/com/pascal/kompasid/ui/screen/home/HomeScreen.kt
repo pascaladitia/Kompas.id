@@ -21,11 +21,13 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,6 +50,7 @@ import com.pascal.kompasid.ui.screen.home.component.homeLiveReport
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
+import com.pascal.kompasid.utils.getRandomAudioUrl
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -56,12 +59,19 @@ fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel(),
     onDetail: () -> Unit
 ) {
+    val context = LocalContext.current
     val event = LocalHomeEvent.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.loadHomePartOne()
         viewModel.loadHomePartTwo()
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.releaseAudio()
+        }
     }
 
     if (uiState.isLoading) LoadingScreen()
@@ -77,7 +87,16 @@ fun HomeScreen(
 
     CompositionLocalProvider(
         LocalHomeEvent provides event.copy(
-            onDetail = onDetail
+            onDetail = onDetail,
+            onAudio = {
+                viewModel.playAudioFromUrl(context, getRandomAudioUrl())
+            },
+            onBookMark = {
+
+            },
+            onShare = {
+
+            }
         )
     ) {
         HomeContent(uiState = uiState)

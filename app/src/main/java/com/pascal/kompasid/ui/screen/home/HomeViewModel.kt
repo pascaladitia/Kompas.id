@@ -1,7 +1,10 @@
 package com.pascal.kompasid.ui.screen.home
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
 import com.pascal.kompasid.domain.usecase.local.LocalUseCase
 import com.pascal.kompasid.domain.usecase.news.NewsUseCase
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
@@ -17,6 +20,8 @@ class HomeViewModel(
     private val newsUseCase: NewsUseCase,
     private val localUseCase: LocalUseCase
 ) : ViewModel() {
+
+    private var exoPlayer: ExoPlayer? = null
 
     private val _uiState = MutableStateFlow(HomeUIState())
     val uiState: StateFlow<HomeUIState> = _uiState.asStateFlow()
@@ -79,8 +84,32 @@ class HomeViewModel(
         }
     }
 
+    fun playAudioFromUrl(context: Context, url: String) {
+        exoPlayer?.release()
+        exoPlayer = ExoPlayer.Builder(context).build().apply {
+            val mediaItem = MediaItem.fromUri(url)
+            setMediaItem(mediaItem)
+            prepare()
+            play()
+        }
+    }
+
+    fun stopAudio() {
+        exoPlayer?.pause()
+    }
+
+    fun releaseAudio() {
+        exoPlayer?.release()
+        exoPlayer = null
+    }
+
     fun resetError() {
         _uiState.update { it.copy(error = false to "") }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        stopAudio()
     }
 }
 
