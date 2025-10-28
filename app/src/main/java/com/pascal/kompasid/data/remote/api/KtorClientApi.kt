@@ -21,9 +21,6 @@ class KtorClientApi(private val context: Context) {
     suspend fun getAdsBanner(): AdsBannerResponse =
         JsonReader.load(context, "ads_banner.json")
 
-    suspend fun getArticles(): CommonSectionResponse =
-        JsonReader.load(context, "articles.json")
-
     suspend fun getBreakingNews(): BreakingNewsResponse =
         JsonReader.load(context, "breaking_news.json")
 
@@ -33,12 +30,31 @@ class KtorClientApi(private val context: Context) {
     suspend fun getIframeCampaign(): AdsBannerResponse =
         JsonReader.load(context, "iframe_campaign.json")
 
-    suspend fun getKabinet(): CommonSectionResponse =
-        JsonReader.load(context, "kabinet.json")
-
     suspend fun getLiveReport(): LiveReportResponse =
         JsonReader.load(context, "live_report.json")
 
+    suspend fun getKabinet(): CommonSectionResponse =
+        JsonReader.load(context, "kabinet.json")
+
     suspend fun getPonAcehSumut(): CommonSectionResponse =
         JsonReader.load(context, "pon_aceh_sumut.json")
+
+    suspend fun getBanjirBekasi(): CommonSectionResponse =
+        JsonReader.load(context, "banjir_bekasi.json")
+
+    suspend fun getArticles(): CommonSectionResponse =
+        JsonReader.load(context, "articles.json")
+
+    suspend fun getOpini(): CommonSectionResponse =
+        JsonReader.load(context, "opini.json")
+
+    suspend fun getBrief(): CommonSectionResponse =
+        JsonReader.load(context, "brief.json")
+
+    suspend fun getRedaksi(): CommonSectionResponse =
+        JsonReader.load(context, "redaksi.json")
+
+    suspend fun getVideo(): CommonSectionResponse =
+        JsonReader.load(context, "video.json")
+
 }

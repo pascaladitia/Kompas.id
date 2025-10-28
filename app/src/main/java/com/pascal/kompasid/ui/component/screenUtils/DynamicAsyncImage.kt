@@ -46,8 +46,10 @@ fun DynamicAsyncImage(
         )
 
         if (isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .shimmer()
             )
         }
     }

@@ -10,10 +10,8 @@ interface NewsRepository {
     suspend fun dashboard() : DashboardResponse
     suspend fun getAdsBanner(): AdsBannerResponse
     suspend fun getIframeCampaign(): AdsBannerResponse
-    suspend fun getArticles(): CommonSectionResponse
     suspend fun getBreakingNews(): BreakingNewsResponse
     suspend fun getHotTopics(): CommonSectionResponse
     suspend fun getLiveReport(): LiveReportResponse
-    suspend fun getKabinet(): CommonSectionResponse
-    suspend fun getPonAcehSumut(): CommonSectionResponse
+    suspend fun getAllCommonSections(): List<CommonSectionResponse>
 }

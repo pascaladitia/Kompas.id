@@ -27,29 +27,26 @@ class HomeViewModel(
 
             combine(
                 newsUseCase.getAdsBanner(),
-                newsUseCase.getArticles(),
                 newsUseCase.getBreakingNews(),
                 newsUseCase.getHotTopics()
-            ) { ads, articles, breaking, hot ->
+            ) { ads, breaking, hotTopics ->
+
                 _uiState.value.copy(
                     isLoading = false,
                     adsBanner = ads,
-                    articles = articles,
                     breakingNews = breaking,
-                    hotTopics = hot
+                    hotTopics = hotTopics
                 )
+            }.catch { e ->
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        error = true to (e.message ?: "Unknown error")
+                    )
+                }
+            }.collect { newState ->
+                _uiState.update { newState }
             }
-                .catch { e ->
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            error = true to (e.message ?: "Unknown error")
-                        )
-                    }
-                }
-                .collect { newState ->
-                    _uiState.update { newState }
-                }
         }
     }
 
@@ -59,29 +56,26 @@ class HomeViewModel(
 
             combine(
                 newsUseCase.getIframeCampaign(),
-                newsUseCase.getKabinet(),
                 newsUseCase.getLiveReport(),
-                newsUseCase.getPonAcehSumut()
-            ) { iframe, kabinet, live, pon ->
+                newsUseCase.getAllCommonSections()
+            ) { iframe, live, commonList ->
+
                 _uiState.value.copy(
                     isLoading = false,
                     iframeCampaign = iframe,
                     liveReport = live,
-                    kabinet = kabinet,
-                    ponAcehSumut = pon
+                    articleList = commonList
                 )
+            }.catch { e ->
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        error = true to (e.message ?: "Unknown error")
+                    )
+                }
+            }.collect { newState ->
+                _uiState.update { newState }
             }
-                .catch { e ->
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            error = true to (e.message ?: "Unknown error")
-                        )
-                    }
-                }
-                .collect { newState ->
-                    _uiState.update { newState }
-                }
         }
     }
 

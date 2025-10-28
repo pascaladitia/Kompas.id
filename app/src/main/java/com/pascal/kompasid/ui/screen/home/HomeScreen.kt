@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
@@ -34,8 +35,8 @@ import com.pascal.kompasid.R
 import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
-import com.pascal.kompasid.ui.screen.home.component.homeArticles
-import com.pascal.kompasid.ui.screen.home.component.homeBanner
+import com.pascal.kompasid.ui.screen.home.component.HomeArticles
+import com.pascal.kompasid.ui.screen.home.component.HomeBanner
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
 import com.pascal.kompasid.ui.screen.home.component.homeCampaign
 import com.pascal.kompasid.ui.screen.home.component.homeHotTopics
@@ -180,11 +181,18 @@ fun HomeFirstTab(
 
         homeHotTopics(item = uiState.hotTopics)
 
-        homeArticles(item = uiState.kabinet)
+        itemsIndexed(uiState.articleList) { index, item ->
+            if (item.category.isNullOrEmpty()) {
+                Column {
+                    HomeArticles(item = item)
 
-        homeArticles(item = uiState.ponAcehSumut)
+                    if ((index + 1) % 2 == 0) {
+                        HomeBanner(item = uiState.adsBanner)
+                    }
+                }
+            }
+        }
 
-        homeBanner(item = uiState.adsBanner)
     }
 }
 

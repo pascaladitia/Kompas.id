@@ -16,6 +16,7 @@ import com.pascal.kompasid.domain.model.LiveReport
 import com.pascal.kompasid.domain.model.MainArticle
 import com.pascal.kompasid.domain.model.MoreReports
 import com.pascal.kompasid.domain.model.RelatedArticle
+import com.pascal.kompasid.utils.addRandomParam
 
 fun DashboardResponse.toDomain(): Dashboard {
     return Dashboard(
@@ -46,10 +47,11 @@ fun BreakingNewsResponse.toDomain() = BreakingNews(
 fun CommonSectionResponse.toDomain(): CommonSection {
     return CommonSection(
         section = this.section.orEmpty(),
+        category = this.category,
         isExclusive = this.isExclusive ?: false,
         articles = this.articles?.map {
             CommonArticle(
-                image = it.image.orEmpty(),
+                image = it.image?.let { url -> addRandomParam(url) },
                 title = it.title.orEmpty(),
                 label = it.label,
                 description = it.description,
@@ -60,7 +62,7 @@ fun CommonSectionResponse.toDomain(): CommonSection {
         }.orEmpty(),
         topics = this.topics?.map {
             CommonArticle(
-                image = it.image.orEmpty(),
+                image = it.image?.let { url -> addRandomParam(url) },
                 title = it.title.orEmpty(),
                 label = it.label,
                 description = it.description,

@@ -25,10 +25,6 @@ class NewsRepositoryImpl(
         return api.getIframeCampaign()
     }
 
-    override suspend fun getArticles(): CommonSectionResponse {
-        return api.getArticles()
-    }
-
     override suspend fun getBreakingNews(): BreakingNewsResponse {
         return api.getBreakingNews()
     }
@@ -41,11 +37,16 @@ class NewsRepositoryImpl(
         return api.getLiveReport()
     }
 
-    override suspend fun getKabinet(): CommonSectionResponse {
-        return api.getKabinet()
-    }
-
-    override suspend fun getPonAcehSumut(): CommonSectionResponse {
-        return api.getPonAcehSumut()
+    override suspend fun getAllCommonSections(): List<CommonSectionResponse> {
+        return listOfNotNull(
+            api.getKabinet(),
+            api.getPonAcehSumut(),
+            api.getBanjirBekasi(),
+            api.getArticles(),
+            api.getOpini(),
+            api.getBrief(),
+            api.getRedaksi(),
+            api.getVideo(),
+        )
     }
 }

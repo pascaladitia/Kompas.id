@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
@@ -34,25 +31,24 @@ import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
 import com.pascal.kompasid.ui.theme.AppTheme
 
-fun LazyListScope.homeArticles(
+@Composable
+fun HomeArticles(
     modifier: Modifier = Modifier,
     item: CommonSection? = null
 ) {
     if (item == null) return
 
-    item {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         HorizontalDivider(
             thickness = 8.dp,
             color = MaterialTheme.colorScheme.outline
         )
-    }
 
-    item {
-        Column(
-            modifier = modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            val firstItem = item.articles.first()
+        val firstItem = item.articles.firstOrNull()
+        if (firstItem != null) {
 
             if (item.section.isNotBlank()) {
                 Row(
@@ -82,16 +78,18 @@ fun LazyListScope.homeArticles(
             }
 
             Box {
-                DynamicAsyncImage(
-                    modifier = Modifier
-                        .padding(bottom = 16.dp)
-                        .fillMaxWidth()
-                        .height(200.dp),
-                    imageUrl = firstItem.image,
-                    placeholder = painterResource(R.drawable.no_thumbnail),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
+                firstItem.image?.let {
+                    DynamicAsyncImage(
+                        modifier = Modifier
+                            .padding(bottom = 16.dp)
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        imageUrl = firstItem.image,
+                        placeholder = painterResource(R.drawable.no_thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
+                }
 
                 if (item.isExclusive) {
                     TextBorderComponent(
@@ -111,13 +109,15 @@ fun LazyListScope.homeArticles(
                 showDivider = false
             )
         }
-    }
 
-    items(item.articles.drop(1)) { item ->
-        ArticleComponent(
-            title = item.title,
-            time = item.publishedTime
-        )
+        item.articles.drop(1).forEach { article ->
+            ArticleComponent(
+                image = article.image,
+                title = article.title,
+                time = article.publishedTime,
+                label = article.label
+            )
+        }
     }
 }
 
@@ -125,8 +125,6 @@ fun LazyListScope.homeArticles(
 @Composable
 private fun HomeArticlesPreview() {
     AppTheme {
-        LazyColumn {
-            homeArticles()
-        }
+        HomeArticles()
     }
 }

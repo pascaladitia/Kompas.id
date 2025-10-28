@@ -25,6 +25,7 @@ fun TextBorderComponent(
     modifier: Modifier = Modifier,
     icon: Int? = null,
     text: String,
+    textColor: Color = Color.White,
     color: Color = MaterialTheme.colorScheme.error,
     paddingValues: PaddingValues = PaddingValues(6.dp),
     shape: RoundedCornerShape = RoundedCornerShape(6.dp)
@@ -49,7 +50,7 @@ fun TextBorderComponent(
         Text(
             text = text,
             style = MaterialTheme.typography.titleSmall.copy(
-                color = Color.White
+                color = textColor
             ),
             textAlign = TextAlign.Center,
             maxLines = 1

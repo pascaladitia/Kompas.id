@@ -14,6 +14,5 @@ data class HomeUIState(
     val breakingNews: BreakingNews? = null,
     val hotTopics: CommonSection? = null,
     val liveReport: LiveReport? = null,
-    val kabinet: CommonSection? = null,
-    val ponAcehSumut: CommonSection? = null
+    val articleList: List<CommonSection> = emptyList()
 )

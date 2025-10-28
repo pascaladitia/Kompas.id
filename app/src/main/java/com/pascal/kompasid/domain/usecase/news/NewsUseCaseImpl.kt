@@ -28,10 +28,6 @@ class NewsUseCaseImpl(
         emit(repository.getIframeCampaign().toDomain())
     }
 
-    override suspend fun getArticles(): Flow<CommonSection> = flow {
-        emit(repository.getArticles().toDomain())
-    }
-
     override suspend fun getBreakingNews(): Flow<BreakingNews> = flow {
         emit(repository.getBreakingNews().toDomain())
     }
@@ -44,11 +40,8 @@ class NewsUseCaseImpl(
         emit(repository.getLiveReport().toDomain())
     }
 
-    override suspend fun getKabinet(): Flow<CommonSection> = flow {
-        emit(repository.getKabinet().toDomain())
-    }
-
-    override suspend fun getPonAcehSumut(): Flow<CommonSection> = flow {
-        emit(repository.getPonAcehSumut().toDomain())
+    override suspend fun getAllCommonSections(): Flow<List<CommonSection>> = flow {
+        val sections = repository.getAllCommonSections().map { it.toDomain() }
+        emit(sections)
     }
 }

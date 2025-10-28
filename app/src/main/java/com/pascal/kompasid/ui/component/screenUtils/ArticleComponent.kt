@@ -3,6 +3,7 @@ package com.pascal.kompasid.ui.component.screenUtils
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +35,7 @@ fun ArticleComponent(
     desc: String? = null,
     time: String? = null,
     image: String? = null,
+    label: String? = null,
     action: Boolean = true,
     isCenter: Boolean = false,
     showDivider: Boolean = true,
@@ -63,6 +65,19 @@ fun ArticleComponent(
                 Column(
                     modifier = Modifier.weight(1f)
                 ) {
+                    label?.let {
+                        val color = if (label.contains("bebas", true)) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.surfaceDim
+
+                        TextBorderComponent(
+                            modifier = Modifier.padding(bottom = 8.dp),
+                            paddingValues = PaddingValues(6.dp),
+                            text = label,
+                            textColor = color,
+                            color = color.copy(0.2f)
+                        )
+                    }
+
                     title?.let {
                         Text(
                             text = title,
