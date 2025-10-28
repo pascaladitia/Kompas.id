@@ -56,6 +56,17 @@ fun CommonSectionResponse.toDomain(): CommonSection {
                 mediaCount = it.media_count,
                 publishedTime = it.published_time
             )
+        }.orEmpty(),
+        topics = this.topics?.map {
+            CommonArticle(
+                image = it.image.orEmpty(),
+                title = it.title.orEmpty(),
+                label = it.label,
+                description = it.description,
+                imageDescription = it.image_description,
+                mediaCount = it.media_count,
+                publishedTime = it.published_time
+            )
         }.orEmpty()
     )
 }

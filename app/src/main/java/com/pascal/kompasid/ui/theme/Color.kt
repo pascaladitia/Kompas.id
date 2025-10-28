@@ -27,7 +27,7 @@ internal val BackgroundLight = Color(0xFFFAFAFA)
 internal val OnBackgroundLight = Color(0xFF212121)
 
 internal val SurfaceLight = Color(0xFFFFFFFF)
-internal val OnSurfaceLight = Color(0xFF151515)
+internal val OnSurfaceLight = Color(0xFF2A2A2A)
 internal val SurfaceVariantLight = Color(0xFFEAEAEA)
 internal val OnSurfaceVariantLight = Color(0xFF606060)
 

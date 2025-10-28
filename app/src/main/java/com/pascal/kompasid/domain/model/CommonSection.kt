@@ -2,7 +2,8 @@ package com.pascal.kompasid.domain.model
 
 data class CommonSection(
     val section: String,
-    val articles: List<CommonArticle>
+    val articles: List<CommonArticle>,
+    val topics: List<CommonArticle>
 )
 
 data class CommonArticle(

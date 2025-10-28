@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CommonSectionResponse(
     val section: String? = null,
-    val articles: List<CommonArticle>? = null
+    val articles: List<CommonArticle>? = null,
+    val topics: List<CommonArticle>? = null
 )
 
 @Serializable
