@@ -22,7 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
@@ -36,6 +40,7 @@ fun ArticleComponent(
     time: String? = null,
     image: String? = null,
     label: String? = null,
+    author: String? = null,
     action: Boolean = true,
     isCenter: Boolean = false,
     showDivider: Boolean = true,
@@ -97,6 +102,20 @@ fun ArticleComponent(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             ),
                             textAlign = if (isCenter) TextAlign.Center else null
+                        )
+                    }
+
+                    author?.let { authorName ->
+                        Text(
+                            text = buildAnnotatedString {
+                                append("Oleh ")
+                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append(authorName)
+                                }
+                            },
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         )
                     }
                 }

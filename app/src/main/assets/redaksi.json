@@ -1,25 +1,25 @@
 {
   "section": "Pilihan Redaksi",
   "category": "Visual",
-  "isExclusive": false,
+  "isExclusive": true,
   "articles": [
     {
-      "image": "https://asset.kompas.id/path/to/komik-indonesia.jpg",
+      "image": "https://picsum.photos/600/400?random=",
       "title": "Komik Indonesia Dari Masa ke Masa",
       "description": null,
-      "image_description": "Ilustrasi karakter komik Indonesia klasik dan modern sedang berpose bersama"
+      "label": "Tutor Visual"
     },
     {
-      "image": "https://asset.kompas.id/path/to/perjalanan-angkasa.jpg",
+      "image": "https://picsum.photos/600/400?random=",
       "title": "Penjelajahan Angkasa: Dari Fiksi ke Fakta",
       "description": null,
-      "image_description": "Ilustrasi astronot dan roket di luar angkasa"
+      "label": "Tutor Visual"
     },
     {
-      "image": "https://asset.kompas.id/path/to/arsitektur-nusantara.jpg",
+      "image": "https://picsum.photos/600/400?random=",
       "title": "Jejak Arsitektur Nusantara di Tengah Modernitas",
       "description": null,
-      "image_description": "Ilustrasi bangunan tradisional Indonesia berpadu dengan gedung modern"
+      "label": "Tutor Visual"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "section": "Multimedia",
+  "category": "Multimedia",
+  "isExclusive": true,
+  "articles": [
+    {
+      "image": "https://picsum.photos/600/400?random=",
+      "title": "Penantian Abadi Para Tahanan PBB",
+      "description": "Duabelas kasus pembunuhan dan analisis data oleh Tim Jurnalisme Data Harian Kompas.",
+      "published_time": "5 menit lalu"
+    },
+    {
+      "image": "https://picsum.photos/600/400?random=",
+      "title": "Jejak Terakhir Para Penjaga Rimba",
+      "media_count": "10",
+      "published_time": "10 menit lalu"
+    },
+    {
+      "image": "https://picsum.photos/600/400?random=",
+      "title": "Tersisa di Tengah Lautan Es",
+      "media_count": "8",
+      "published_time": "20 menit lalu"
+    }
+  ],
+  "more_link": "Lihat Multimedia lainnya"
+}

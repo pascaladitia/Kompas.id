@@ -49,12 +49,15 @@ fun CommonSectionResponse.toDomain(): CommonSection {
         section = this.section.orEmpty(),
         category = this.category,
         isExclusive = this.isExclusive ?: false,
+        moreLink = this.more_link,
         articles = this.articles?.map {
             CommonArticle(
+                isExclusive = it.isExclusive ?: false,
                 image = it.image?.let { url -> addRandomParam(url) },
                 title = it.title.orEmpty(),
                 label = it.label,
                 description = it.description,
+                author = it.author,
                 imageDescription = it.image_description,
                 mediaCount = it.media_count,
                 publishedTime = it.published_time
@@ -62,10 +65,12 @@ fun CommonSectionResponse.toDomain(): CommonSection {
         }.orEmpty(),
         topics = this.topics?.map {
             CommonArticle(
+                isExclusive = it.isExclusive ?: false,
                 image = it.image?.let { url -> addRandomParam(url) },
                 title = it.title.orEmpty(),
                 label = it.label,
                 description = it.description,
+                author = it.author,
                 imageDescription = it.image_description,
                 mediaCount = it.media_count,
                 publishedTime = it.published_time

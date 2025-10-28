@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -22,11 +21,10 @@ import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
 import com.pascal.kompasid.domain.model.LiveReport
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
-import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
+import com.pascal.kompasid.ui.component.screenUtils.TopicsSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleTimeline
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
-import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.theme.AppTheme
 
 fun LazyListScope.homeLiveReport(
@@ -100,7 +98,7 @@ fun LazyListScope.homeLiveReport(
     }
 
     item {
-        ArticleSection(
+        TopicsSection(
             label = item.moreReports?.label.orEmpty(),
             value = item.moreReports?.count.orEmpty()
         )
