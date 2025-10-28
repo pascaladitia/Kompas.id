@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CommonSectionResponse(
+    val headline: String? = null,
     val section: String? = null,
     val category: String? = null,
     val isExclusive: Boolean? = null,
@@ -22,5 +23,7 @@ data class CommonArticle(
     val author: String? = null,
     val image_description: String? = null,
     val media_count: Int? = null,
-    val published_time: String? = null
+    val published_time: String? = null,
+    val audio: String? = null,
+    val share: String? = null
 )

@@ -1,6 +1,7 @@
 package com.pascal.kompasid.domain.model
 
 data class CommonSection(
+    val headline: String?,
     val section: String,
     val category: String?,
     val isExclusive: Boolean,
@@ -18,5 +19,7 @@ data class CommonArticle(
     val author: String?,
     val imageDescription: String?,
     val mediaCount: Int?,
-    val publishedTime: String?
+    val publishedTime: String?,
+    val audio: String?,
+    val share: String?
 )

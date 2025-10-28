@@ -1,11 +1,13 @@
 package com.pascal.kompasid.ui.screen.home.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,21 +22,19 @@ import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
 import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
-import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
-fun HomeArticles(
+fun HomeBriefArticles(
     modifier: Modifier = Modifier,
     item: CommonSection? = null
 ) {
     if (item == null) return
 
     Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier.fillMaxWidth()
     ) {
         HorizontalDivider(
             thickness = 8.dp,
@@ -44,11 +44,25 @@ fun HomeArticles(
         val firstItem = item.articles.firstOrNull()
         if (firstItem != null) {
 
-            if (item.section.isNotBlank()) {
-                ArticleSection(
-                    label = item.section,
-                    isExclusive = item.isExclusive
-                )
+            item.headline?.let {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(40.dp),
+                        painter = painterResource(R.drawable.img_kompas_brief),
+                        contentDescription = null
+                    )
+
+                    Text(
+                        text = item.headline,
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            color = MaterialTheme.colorScheme.inverseOnSurface
+                        )
+                    )
+                }
             }
 
             firstItem.image?.let {
@@ -83,37 +97,13 @@ fun HomeArticles(
                 showDivider = false
             )
         }
-
-        item.articles.drop(1).forEach { article ->
-            ArticleComponent(
-                image = article.image,
-                title = article.title,
-                time = article.publishedTime,
-                label = article.label,
-                author = article.author
-            )
-        }
-
-        item.moreLink?.let {
-            Text(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .fillMaxWidth(),
-                text = item.moreLink,
-                style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.primary
-                ),
-                textDecoration = TextDecoration.Underline
-            )
-        }
-
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun HomeArticlesPreview() {
+private fun HomeBriefArticlesPreview() {
     AppTheme {
-        HomeArticles()
+        HomeBriefArticles()
     }
 }

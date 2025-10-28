@@ -91,3 +91,10 @@ enum class NewsTab(val title: String) {
     FREE("Bebas"),
     FAVORITE("Favorit Pembaca"),
 }
+
+enum class Category(val title: String) {
+    BRIEF("Brief"),
+    VISUAL("Visual"),
+    VIDEO("Video"),
+    MULTIMEDIA("Multimedia")
+}

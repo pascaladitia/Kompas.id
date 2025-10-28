@@ -46,6 +46,7 @@ fun BreakingNewsResponse.toDomain() = BreakingNews(
 
 fun CommonSectionResponse.toDomain(): CommonSection {
     return CommonSection(
+        headline = this.headline,
         section = this.section.orEmpty(),
         category = this.category,
         isExclusive = this.isExclusive ?: false,
@@ -60,7 +61,9 @@ fun CommonSectionResponse.toDomain(): CommonSection {
                 author = it.author,
                 imageDescription = it.image_description,
                 mediaCount = it.media_count,
-                publishedTime = it.published_time
+                publishedTime = it.published_time,
+                audio = it.audio,
+                share = it.share
             )
         }.orEmpty(),
         topics = this.topics?.map {
@@ -73,7 +76,9 @@ fun CommonSectionResponse.toDomain(): CommonSection {
                 author = it.author,
                 imageDescription = it.image_description,
                 mediaCount = it.media_count,
-                publishedTime = it.published_time
+                publishedTime = it.published_time,
+                audio = it.audio,
+                share = it.share
             )
         }.orEmpty()
     )

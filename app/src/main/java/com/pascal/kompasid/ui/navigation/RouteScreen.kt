@@ -65,7 +65,6 @@ fun RouteScreen(
                 }
                 composable(route = Screen.HomeScreen.route) {
                     HomeScreen(
-                        paddingValues = paddingValues,
                         onDetail = {}
                     )
                 }

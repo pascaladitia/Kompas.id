@@ -46,7 +46,7 @@ class NewsRepositoryImpl(
             api.getOpini(),
             api.getBrief(),
             api.getRedaksi(),
-            api.getVideo(),
+            api.getVideo()
         )
     }
 }

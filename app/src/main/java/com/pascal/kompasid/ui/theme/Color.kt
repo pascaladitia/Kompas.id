@@ -48,7 +48,7 @@ internal val SurfaceContainerHighLight = Color(0xFFEEEEEE)
 internal val SurfaceContainerHighestLight = Color(0xFFE9E9E9)
 
 
-// ==================== Dark Colors (disesuaikan) ====================
+// ==================== Dark Colors ====================
 internal val PrimaryDark = Color(0xFF00559A)
 internal val OnPrimaryDark = Color(0xFFFFFFFF)
 internal val PrimaryContainerDark = Color(0xFF004080)
@@ -92,3 +92,6 @@ internal val SurfaceContainerLowDark = Color(0xFF171717)
 internal val SurfaceContainerDark = Color(0xFF1F1F1F)
 internal val SurfaceContainerHighDark = Color(0xFF262626)
 internal val SurfaceContainerHighestDark = Color(0xFF2E2E2E)
+
+internal val Yellow500 = Color(0xFFFFC107)
+internal val Green500 = Color(0xFF4CAF50)

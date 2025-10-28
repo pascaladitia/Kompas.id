@@ -36,9 +36,9 @@ fun Modifier.shimmer(): Modifier {
     )
 
     val shimmerColors = listOf(
-        Color.LightGray.copy(alpha = 0.9f),
+        Color.LightGray,
         MaterialTheme.colorScheme.primary,
-        Color.LightGray.copy(alpha = 0.9f),
+        Color.LightGray,
     )
 
     val brush = Brush.linearGradient(

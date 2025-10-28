@@ -42,7 +42,7 @@ fun ArticleSection(
                 thickness = 4.dp,
                 color = MaterialTheme.colorScheme.surfaceDim,
                 modifier = Modifier
-                    .padding(end = 16.dp)
+                    .padding(top = 4.dp, bottom = 4.dp, end = 16.dp)
                     .fillMaxHeight()
             )
         }

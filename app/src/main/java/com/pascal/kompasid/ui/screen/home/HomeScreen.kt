@@ -2,7 +2,6 @@ package com.pascal.kompasid.ui.screen.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,8 +34,10 @@ import com.pascal.kompasid.R
 import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
-import com.pascal.kompasid.ui.screen.home.component.HomeArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeBanner
+import com.pascal.kompasid.ui.screen.home.component.HomeBriefArticles
+import com.pascal.kompasid.ui.screen.home.component.HomeCommonArticles
+import com.pascal.kompasid.ui.screen.home.component.HomeVisualArticles
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
 import com.pascal.kompasid.ui.screen.home.component.homeCampaign
 import com.pascal.kompasid.ui.screen.home.component.homeHotTopics
@@ -49,13 +50,10 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
-    paddingValues: PaddingValues,
     viewModel: HomeViewModel = koinViewModel(),
     onDetail: () -> Unit
 ) {
     val event = LocalHomeEvent.current
-    val coroutineScope = rememberCoroutineScope()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
@@ -182,13 +180,24 @@ fun HomeFirstTab(
         homeHotTopics(item = uiState.hotTopics)
 
         itemsIndexed(uiState.articleList) { index, item ->
-            if (item.category.isNullOrEmpty()) {
-                Column {
-                    HomeArticles(item = item)
-
-                    if ((index + 1) % 2 == 0) {
-                        HomeBanner(item = uiState.adsBanner)
+            Column {
+                when (item.category) {
+                    null, "" -> {
+                        HomeCommonArticles(item = item)
                     }
+                    Category.BRIEF.title -> {
+                        HomeBriefArticles(item = item)
+                    }
+                    Category.VISUAL.title -> {
+                        HomeVisualArticles(item = item)
+                    }
+                    else -> {
+                        HomeCommonArticles(item = item)
+                    }
+                }
+
+                if ((index + 1) % 4 == 0 && uiState.adsBanner != null) {
+                    HomeBanner(item = uiState.adsBanner)
                 }
             }
         }
