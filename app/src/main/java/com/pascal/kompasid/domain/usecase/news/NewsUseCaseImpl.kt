@@ -1,6 +1,6 @@
 package com.pascal.kompasid.domain.usecase.news
 
-import com.pascal.kompasid.data.repository.NewsRepositoryImpl
+import com.pascal.kompasid.data.repository.NewsRepository
 import com.pascal.kompasid.domain.mapper.toDomain
 import com.pascal.kompasid.domain.model.AdsBanner
 import com.pascal.kompasid.domain.model.BreakingNews
@@ -13,7 +13,7 @@ import org.koin.core.annotation.Single
 
 @Single
 class NewsUseCaseImpl(
-    private val repository: NewsRepositoryImpl
+    private val repository: NewsRepository
 ) : NewsUseCase {
 
     override suspend fun dashboard(): Flow<Dashboard> = flow {

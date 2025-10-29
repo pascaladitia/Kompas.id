@@ -52,7 +52,7 @@ fun LazyListScope.homeBreakingNews(
                 title = item.headline,
                 desc = item.subheadline,
                 time = item.publishedTime,
-                isFavorite = article.isFavorite,
+                isFavorite = item.isFavorite,
                 isCenter = true,
                 showDivider = false,
                 onItemClick = { event.onDetail(article)},

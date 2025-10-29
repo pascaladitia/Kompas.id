@@ -6,5 +6,6 @@ data class BreakingNews(
     val subheadline: String?,
     val publishedTime: String?,
     val source: String?,
+    val isFavorite: Boolean = false,
     val articles: List<CommonArticle>
 )

@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import com.pascal.kompasid.domain.mapper.getFavoriteTitlesFlow
+import com.pascal.kompasid.domain.mapper.withFavorites
 import com.pascal.kompasid.domain.model.CommonArticle
 import com.pascal.kompasid.domain.usecase.local.LocalUseCase
 import com.pascal.kompasid.domain.usecase.news.NewsUseCase
@@ -25,7 +27,6 @@ class HomeViewModel(
 ) : ViewModel() {
 
     private var exoPlayer: ExoPlayer? = null
-
     private val _uiState = MutableStateFlow(HomeUIState())
     val uiState: StateFlow<HomeUIState> = _uiState.asStateFlow()
 
@@ -36,14 +37,14 @@ class HomeViewModel(
             combine(
                 newsUseCase.getAdsBanner(),
                 newsUseCase.getBreakingNews(),
-                newsUseCase.getHotTopics()
-            ) { ads, breaking, hotTopics ->
-
+                newsUseCase.getHotTopics(),
+                localUseCase.getFavoriteTitlesFlow()
+            ) { ads, breaking, hotTopics, favorites ->
                 _uiState.value.copy(
                     isLoading = false,
                     adsBanner = ads,
-                    breakingNews = breaking,
-                    hotTopics = hotTopics
+                    breakingNews = breaking.withFavorites(favorites),
+                    hotTopics = hotTopics.withFavorites(favorites)
                 )
             }.catch { e ->
                 _uiState.update {
@@ -52,9 +53,7 @@ class HomeViewModel(
                         error = true to (e.message ?: "Unknown error")
                     )
                 }
-            }.collect { newState ->
-                _uiState.update { newState }
-            }
+            }.collect { newState -> _uiState.update { newState } }
         }
     }
 
@@ -65,14 +64,14 @@ class HomeViewModel(
             combine(
                 newsUseCase.getIframeCampaign(),
                 newsUseCase.getLiveReport(),
-                newsUseCase.getAllCommonSections()
-            ) { iframe, live, commonList ->
-
+                newsUseCase.getAllCommonSections(),
+                localUseCase.getFavoriteTitlesFlow()
+            ) { iframe, live, commonList, favorites ->
                 _uiState.value.copy(
                     isLoading = false,
                     iframeCampaign = iframe,
-                    liveReport = live,
-                    articleList = commonList
+                    liveReport = live.withFavorites(favorites),
+                    articleList = commonList.map { it.withFavorites(favorites) }
                 )
             }.catch { e ->
                 _uiState.update {
@@ -81,22 +80,16 @@ class HomeViewModel(
                         error = true to (e.message ?: "Unknown error")
                     )
                 }
-            }.collect { newState ->
-                _uiState.update { newState }
-            }
+            }.collect { newState -> _uiState.update { newState } }
         }
     }
 
     fun modifyFavorite(context: Context, item: CommonArticle?, isFavorite: Boolean) {
         viewModelScope.launch {
             if (item == null) return@launch
-
             try {
-                if (!isFavorite) {
-                    localUseCase.insertFavorite(item)
-                } else {
-                    localUseCase.deleteFavorite(item)
-                }
+                if (!isFavorite) localUseCase.insertFavorite(item)
+                else localUseCase.deleteFavorite(item)
             } catch (e: Exception) {
                 e.printStackTrace()
                 showToast(context, "Gagal menambahkan ke favorit")
@@ -110,11 +103,9 @@ class HomeViewModel(
                 type = "text/plain"
                 putExtra(Intent.EXTRA_TEXT, url)
             }
-
             val chooser = Intent.createChooser(shareIntent, "Bagikan link ke...")
             chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(chooser)
-
         } catch (e: Exception) {
             e.printStackTrace()
             showToast(context, "Gagal membagikan: ${e.message}")
@@ -123,7 +114,6 @@ class HomeViewModel(
 
     fun playAudioFromUrl(context: Context, url: String?) {
         if (url.isNullOrBlank()) return
-
         exoPlayer?.release()
         exoPlayer = ExoPlayer.Builder(context).build().apply {
             val mediaItem = MediaItem.fromUri(url)
