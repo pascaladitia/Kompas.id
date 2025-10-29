@@ -2,6 +2,7 @@ package com.pascal.kompasid.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -26,5 +27,22 @@ fun addRandomParam(url: String?): String? {
         url.contains("random=") -> "$url${(0..9999).random()}"
         url.contains("?random") -> "$url${(0..9999).random()}"
         else -> url
+    }
+}
+
+fun actionShareUrl(context: Context, url: String?) {
+    try {
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, url)
+        }
+
+        val chooser = Intent.createChooser(shareIntent, "Bagikan link ke...")
+        chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(chooser)
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        showToast(context, "Gagal membagikan: ${e.message}")
     }
 }

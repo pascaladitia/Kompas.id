@@ -41,6 +41,10 @@ class LocalRepositoryImpl(
     }
 
     override suspend fun getFavorite(title: String): Boolean {
-        return (database.favoritesDao().getFavoriteMovie(title) != null)
+        return database.favoritesDao().getFavorite(title) != null
+    }
+
+    override suspend fun clearFavorite() {
+        return database.favoritesDao().clearFavoritesTable()
     }
 }

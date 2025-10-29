@@ -16,9 +16,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FontDownload
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkBorder
-import androidx.compose.material.icons.outlined.Tab
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -55,6 +53,7 @@ import com.pascal.kompasid.ui.screen.detail.component.DetailThumbnail
 import com.pascal.kompasid.ui.screen.detail.event.DetailUIState
 import com.pascal.kompasid.ui.screen.detail.event.LocalDetailEvent
 import com.pascal.kompasid.ui.theme.AppTheme
+import com.pascal.kompasid.utils.actionShareUrl
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -96,10 +95,10 @@ fun DetailScreen(
                 viewModel.playAudioFromUrl(context, it)
             },
             onBookMark = { item, isFav ->
-                viewModel.modifyFavorite(context, item, isFav)
+                viewModel.modifyFavorite(item, isFav)
             },
             onShare = {
-                viewModel.actionShareUrl(context, it)
+                actionShareUrl(context, it)
             }
         )
     ) {
@@ -112,9 +111,11 @@ fun DetailContent(
     modifier: Modifier = Modifier,
     uiState: DetailUIState = DetailUIState()
 ) {
+    if (uiState.articles == null) return
+
     val event = LocalDetailEvent.current
     var moreExpanded by rememberSaveable { mutableStateOf(false) }
-    var isFavorite by rememberSaveable { mutableStateOf(uiState.articles?.isFavorite ?: false) }
+    var isFavorite by rememberSaveable { mutableStateOf(uiState.articles.isFavorite) }
     val iconFavorite = if (isFavorite) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder
 
     val listState = rememberLazyListState()
@@ -217,7 +218,7 @@ fun DetailContent(
                         .padding(16.dp)
                         .fillMaxWidth()
                 ) {
-                    uiState.articles?.author?.let { authorName ->
+                    uiState.articles.author?.let { authorName ->
                         Text(
                             modifier = Modifier.padding(top = 8.dp),
                             text = buildAnnotatedString {
@@ -232,7 +233,7 @@ fun DetailContent(
                         )
                     }
 
-                    uiState.articles?.publishedTime?.let {
+                    uiState.articles.publishedTime?.let {
                         Text(
                             modifier = Modifier.padding(top = 8.dp),
                             text = it,

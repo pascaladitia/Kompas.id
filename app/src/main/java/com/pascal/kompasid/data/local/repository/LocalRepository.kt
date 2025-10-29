@@ -14,4 +14,5 @@ interface LocalRepository {
     suspend fun deleteFavorite(entity: FavoritesEntity)
     suspend fun getFavorite(): List<FavoritesEntity>?
     suspend fun getFavorite(title: String): Boolean
+    suspend fun clearFavorite()
 }

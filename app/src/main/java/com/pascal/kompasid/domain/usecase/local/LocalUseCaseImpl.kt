@@ -26,4 +26,8 @@ class LocalUseCaseImpl(
     override suspend fun getFavorite(title: String): Boolean {
         return repository.getFavorite(title)
     }
+
+    override suspend fun clearFavorite() {
+        return repository.clearFavorite()
+    }
 }

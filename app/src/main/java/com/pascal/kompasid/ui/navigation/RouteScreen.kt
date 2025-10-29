@@ -109,7 +109,13 @@ fun RouteScreen(
                 }
                 composable(route = Screen.BookmarkScreen.route) {
                     BookmarkScreen(
-                        onNavBack = {}
+                        onNavBack = {
+                            navController.popBackStack()
+                        },
+                        onDetail = {
+                            saveToCurrentBackStack(navController, "articles", it)
+                            navController.navigate(Screen.DetailScreen.route)
+                        }
                     )
                 }
             }

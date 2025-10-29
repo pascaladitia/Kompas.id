@@ -183,7 +183,8 @@ fun FavoritesEntity.toCommonArticle(): CommonArticle {
         mediaCount = this.mediaCount,
         publishedTime = this.publishedTime,
         audio = this.audio,
-        share = this.share
+        share = this.share,
+        isFavorite = true
     )
 }
 

@@ -52,6 +52,7 @@ import com.pascal.kompasid.ui.screen.home.component.homeLiveReport
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
+import com.pascal.kompasid.utils.actionShareUrl
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -93,10 +94,10 @@ fun HomeScreen(
                 viewModel.playAudioFromUrl(context, it)
             },
             onBookMark = { item, isFav ->
-                viewModel.modifyFavorite(context, item, isFav)
+                viewModel.modifyFavorite(item, isFav)
             },
             onShare = {
-                viewModel.actionShareUrl(context, it)
+                actionShareUrl(context, it)
             }
         )
     ) {

@@ -7,4 +7,5 @@ interface LocalUseCase {
     suspend fun deleteFavorite(entity: CommonArticle)
     suspend fun getFavorite(): List<CommonArticle>?
     suspend fun getFavorite(title: String): Boolean
+    suspend fun clearFavorite()
 }
