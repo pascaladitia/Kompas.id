@@ -18,7 +18,7 @@ val Typography = Typography(
     headlineMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.merriweather)),
         fontWeight = FontWeight.ExtraBold,
-        fontSize = 24.sp,
+        fontSize = 22.sp,
         lineHeight = 32.sp
     ),
     headlineSmall = TextStyle(

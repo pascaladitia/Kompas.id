@@ -23,6 +23,8 @@ import com.pascal.kompasid.ui.screen.favorite.FavoriteScreen
 import com.pascal.kompasid.ui.screen.home.HomeScreen
 import com.pascal.kompasid.ui.screen.profile.ProfileScreen
 import com.pascal.kompasid.ui.screen.splash.SplashScreen
+import com.pascal.kompasid.utils.base.getFromPreviousBackStack
+import com.pascal.kompasid.utils.base.saveToCurrentBackStack
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -65,13 +67,18 @@ fun RouteScreen(
                 }
                 composable(route = Screen.HomeScreen.route) {
                     HomeScreen(
-                        onDetail = {}
+                        onDetail = {
+                            saveToCurrentBackStack(navController, "articles", it)
+                            navController.navigate(Screen.DetailScreen.route)
+                        }
                     )
                 }
                 composable(route = Screen.DetailScreen.route) {
                     DetailScreen(
-                        paddingValues = paddingValues,
-                        onDetail = {}
+                        item = getFromPreviousBackStack(navController, "articles"),
+                        onNavBack = {
+                            navController.popBackStack()
+                        }
                     )
                 }
                 composable(route = Screen.EPaperScreen.route) {
