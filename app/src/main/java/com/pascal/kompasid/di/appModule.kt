@@ -12,6 +12,7 @@ import com.pascal.kompasid.domain.usecase.local.LocalUseCase
 import com.pascal.kompasid.domain.usecase.local.LocalUseCaseImpl
 import com.pascal.kompasid.domain.usecase.news.NewsUseCase
 import com.pascal.kompasid.domain.usecase.news.NewsUseCaseImpl
+import com.pascal.kompasid.ui.screen.bookmark.BookmarkViewModel
 import com.pascal.kompasid.ui.screen.detail.DetailViewModel
 import com.pascal.kompasid.ui.screen.favorite.FavoriteViewModel
 import com.pascal.kompasid.ui.screen.home.HomeViewModel
@@ -54,4 +55,5 @@ val appModule = module {
     viewModelOf(::FavoriteViewModel)
     viewModelOf(::ProfileViewModel)
     viewModelOf(::DetailViewModel)
+    viewModelOf(::BookmarkViewModel)
 }

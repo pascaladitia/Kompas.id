@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.pascal.kompasid.ui.screen.bookmark.BookmarkScreen
 import com.pascal.kompasid.ui.screen.detail.DetailScreen
 import com.pascal.kompasid.ui.screen.favorite.FavoriteScreen
 import com.pascal.kompasid.ui.screen.home.HomeScreen
@@ -101,8 +102,14 @@ fun RouteScreen(
                 }
                 composable(route = Screen.ProfileScreen.route) {
                     ProfileScreen(
-                        paddingValues = paddingValues,
-                        onDetail = {}
+                        onBookMark = {
+                            navController.navigate(Screen.BookmarkScreen.route)
+                        },
+                    )
+                }
+                composable(route = Screen.BookmarkScreen.route) {
+                    BookmarkScreen(
+                        onNavBack = {}
                     )
                 }
             }
