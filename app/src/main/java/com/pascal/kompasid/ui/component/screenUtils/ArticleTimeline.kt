@@ -2,6 +2,7 @@ package com.pascal.kompasid.ui.component.screenUtils
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,11 +31,14 @@ fun ArticleTimeline(
     time: String,
     title: String,
     showDot: Boolean = true,
+    onDetail: () -> Unit = {}
 ) {
     val redColor = MaterialTheme.colorScheme.error
 
     ConstraintLayout(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onDetail() }
     ) {
         val (dot, line, content) = createRefs()
 

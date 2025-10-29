@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.pascal.kompasid.R
+import com.pascal.kompasid.domain.model.CommonArticle
 import com.pascal.kompasid.ui.component.dialog.ShowDialog
 import com.pascal.kompasid.ui.component.screenUtils.LoadingScreen
 import com.pascal.kompasid.ui.component.screenUtils.TopAppBarComponent
@@ -50,14 +51,13 @@ import com.pascal.kompasid.ui.screen.home.component.homeLiveReport
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
-import com.pascal.kompasid.utils.getRandomAudioUrl
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel(),
-    onDetail: () -> Unit
+    onDetail: (CommonArticle?) -> Unit
 ) {
     val context = LocalContext.current
     val event = LocalHomeEvent.current
@@ -89,13 +89,13 @@ fun HomeScreen(
         LocalHomeEvent provides event.copy(
             onDetail = onDetail,
             onAudio = {
-                viewModel.playAudioFromUrl(context, getRandomAudioUrl())
+                viewModel.playAudioFromUrl(context, it)
             },
             onBookMark = {
 
             },
             onShare = {
-
+                viewModel.actionShareUrl(context, it)
             }
         )
     ) {
@@ -108,7 +108,6 @@ fun HomeContent(
     modifier: Modifier = Modifier,
     uiState: HomeUIState = HomeUIState()
 ) {
-    val event = LocalHomeEvent.current
     val coroutine = rememberCoroutineScope()
 
     val tabItems = NewsTab.entries

@@ -6,10 +6,5 @@ data class BreakingNews(
     val subheadline: String?,
     val publishedTime: String?,
     val source: String?,
-    val articles: List<BreakingNewsArticle>
-)
-
-data class BreakingNewsArticle(
-    val title: String,
-    val publishedTime: String
+    val articles: List<CommonArticle>
 )

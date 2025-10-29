@@ -7,16 +7,14 @@ import com.pascal.kompasid.data.remote.dtos.LiveReportResponse
 import com.pascal.kompasid.data.remote.dtos.dashboard.DashboardResponse
 import com.pascal.kompasid.domain.model.AdsBanner
 import com.pascal.kompasid.domain.model.BreakingNews
-import com.pascal.kompasid.domain.model.BreakingNewsArticle
 import com.pascal.kompasid.domain.model.CommonArticle
 import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.domain.model.Dashboard
-import com.pascal.kompasid.domain.model.FeaturedArticle
 import com.pascal.kompasid.domain.model.LiveReport
-import com.pascal.kompasid.domain.model.MainArticle
 import com.pascal.kompasid.domain.model.MoreReports
-import com.pascal.kompasid.domain.model.RelatedArticle
 import com.pascal.kompasid.utils.addRandomParam
+import com.pascal.kompasid.utils.getRandomAudioUrl
+import com.pascal.kompasid.utils.getSampleShareUrl
 
 fun DashboardResponse.toDomain(): Dashboard {
     return Dashboard(
@@ -37,9 +35,19 @@ fun BreakingNewsResponse.toDomain() = BreakingNews(
     publishedTime = published_time,
     source = source,
     articles = articles?.map {
-        BreakingNewsArticle(
+        CommonArticle(
+            isExclusive = it.isExclusive ?: false,
+            image = it.image?.let { url -> addRandomParam(url) },
             title = it.title.orEmpty(),
-            publishedTime = it.published_time.orEmpty()
+            label = it.label,
+            description = it.description,
+            author = it.author,
+            category = it.category,
+            imageDescription = it.image_description,
+            mediaCount = it.media_count,
+            publishedTime = it.published_time,
+            audio = getRandomAudioUrl(),
+            share = "${getSampleShareUrl()}${it.title}"
         )
     }.orEmpty()
 )
@@ -59,11 +67,12 @@ fun CommonSectionResponse.toDomain(): CommonSection {
                 label = it.label,
                 description = it.description,
                 author = it.author,
+                category = it.category,
                 imageDescription = it.image_description,
                 mediaCount = it.media_count,
                 publishedTime = it.published_time,
-                audio = it.audio,
-                share = it.share
+                audio = getRandomAudioUrl(),
+                share = "${getSampleShareUrl()}${it.title}"
             )
         }.orEmpty(),
         topics = this.topics?.map {
@@ -74,11 +83,12 @@ fun CommonSectionResponse.toDomain(): CommonSection {
                 label = it.label,
                 description = it.description,
                 author = it.author,
+                category = it.category,
                 imageDescription = it.image_description,
                 mediaCount = it.media_count,
                 publishedTime = it.published_time,
-                audio = it.audio,
-                share = it.share
+                audio = getRandomAudioUrl(),
+                share = "${getSampleShareUrl()}${it.title}"
             )
         }.orEmpty()
     )
@@ -87,17 +97,35 @@ fun CommonSectionResponse.toDomain(): CommonSection {
 fun LiveReportResponse.toDomain() = LiveReport(
     reportType = report_type.orEmpty(),
     mainArticle = main_article?.let {
-        MainArticle(
-            image = it.image.orEmpty(),
+        CommonArticle(
+            isExclusive = it.isExclusive ?: false,
+            image = it.image?.let { url -> addRandomParam(url) },
+            title = it.title.orEmpty(),
+            label = it.label,
+            description = it.description,
+            author = it.author,
             category = it.category,
-            title = it.title,
-            publishedTime = it.published_time
+            imageDescription = it.image_description,
+            mediaCount = it.media_count,
+            publishedTime = it.published_time,
+            audio = getRandomAudioUrl(),
+            share = "${getSampleShareUrl()}${it.title}"
         )
     },
     relatedArticles = related_articles?.map {
-        RelatedArticle(
-            title = it.title,
-            publishedTime = it.published_time
+        CommonArticle(
+            isExclusive = it.isExclusive ?: false,
+            image = it.image?.let { url -> addRandomParam(url) },
+            title = it.title.orEmpty(),
+            label = it.label,
+            description = it.description,
+            author = it.author,
+            category = it.category,
+            imageDescription = it.image_description,
+            mediaCount = it.media_count,
+            publishedTime = it.published_time,
+            audio = getRandomAudioUrl(),
+            share = "${getSampleShareUrl()}${it.title}"
         )
     }.orEmpty(),
     moreReports = more_reports?.let {
@@ -107,9 +135,36 @@ fun LiveReportResponse.toDomain() = LiveReport(
         )
     },
     featuredArticles = featured_articles?.map {
-        FeaturedArticle(
-            image = it.image.orEmpty(),
-            title = it.title
+        CommonArticle(
+            isExclusive = it.isExclusive ?: false,
+            image = it.image?.let { url -> addRandomParam(url) },
+            title = it.title.orEmpty(),
+            label = it.label,
+            description = it.description,
+            author = it.author,
+            category = it.category,
+            imageDescription = it.image_description,
+            mediaCount = it.media_count,
+            publishedTime = it.published_time,
+            audio = getRandomAudioUrl(),
+            share = "${getSampleShareUrl()}${it.title}"
         )
     }.orEmpty()
 )
+
+fun BreakingNews.toCommonArticle(): CommonArticle {
+    return CommonArticle(
+        isExclusive = false,
+        image = image,
+        title = headline,
+        label = source,
+        description = subheadline,
+        author = source,
+        category = "Breaking News",
+        imageDescription = null,
+        mediaCount = articles.size,
+        publishedTime = publishedTime,
+        audio = getRandomAudioUrl(),
+        share = "${getSampleShareUrl()}${headline}"
+    )
+}

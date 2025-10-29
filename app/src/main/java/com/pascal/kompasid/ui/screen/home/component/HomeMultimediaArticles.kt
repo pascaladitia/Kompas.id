@@ -40,6 +40,7 @@ import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
@@ -48,6 +49,8 @@ fun HomeMultimediaArticles(
     item: CommonSection? = null
 ) {
     if (item == null) return
+
+    val event = LocalHomeEvent.current
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -97,7 +100,11 @@ fun HomeMultimediaArticles(
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
                 author = firstItem.author,
-                showDivider = false
+                showDivider = false,
+                onItemClick = { event.onDetail(firstItem)},
+                onBookmarkClick = { event.onBookMark(firstItem) },
+                onAudioClick = { event.onAudio(firstItem.audio) },
+                onShareClick = { event.onShare(firstItem.share) }
             )
         }
 
@@ -111,7 +118,13 @@ fun HomeMultimediaArticles(
             contentPadding = PaddingValues(end = 16.dp)
         ) {
             items(item.articles.drop(1)) {
-                MultimediaArticlesItem(item = it)
+                MultimediaArticlesItem(
+                    item = it,
+                    onItemClick = { event.onDetail(it)},
+                    onBookmarkClick = { event.onBookMark(it) },
+                    onAudioClick = { event.onAudio(it.audio) },
+                    onShareClick = { event.onShare(it.share) }
+                )
             }
         }
 
@@ -134,7 +147,11 @@ fun HomeMultimediaArticles(
 @Composable
 fun MultimediaArticlesItem(
     modifier: Modifier = Modifier,
-    item: CommonArticle
+    item: CommonArticle,
+    onShareClick: () -> Unit = {},
+    onBookmarkClick: () -> Unit = {},
+    onAudioClick: () -> Unit = {},
+    onItemClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier.width(380.dp)
@@ -143,6 +160,7 @@ fun MultimediaArticlesItem(
             modifier = Modifier
                 .padding(start = 16.dp)
                 .clip(RoundedCornerShape(8.dp))
+                .clickable { onItemClick() }
                 .fillMaxWidth()
                 .height(200.dp)
         ) {
@@ -218,7 +236,7 @@ fun MultimediaArticlesItem(
                 Icon(
                     modifier = Modifier
                         .clip(CircleShape)
-                        .clickable { }
+                        .clickable { onShareClick() }
                         .size(42.dp),
                     painter = painterResource(R.drawable.ic_share),
                     contentDescription = null,
@@ -228,7 +246,7 @@ fun MultimediaArticlesItem(
                 Icon(
                     modifier = Modifier
                         .clip(CircleShape)
-                        .clickable { }
+                        .clickable { onBookmarkClick() }
                         .size(42.dp),
                     painter = painterResource(R.drawable.ic_bookmark),
                     contentDescription = null,
@@ -238,7 +256,7 @@ fun MultimediaArticlesItem(
                 Icon(
                     modifier = Modifier
                         .clip(CircleShape)
-                        .clickable { }
+                        .clickable { onAudioClick() }
                         .size(42.dp),
                     painter = painterResource(R.drawable.ic_audio),
                     contentDescription = null,

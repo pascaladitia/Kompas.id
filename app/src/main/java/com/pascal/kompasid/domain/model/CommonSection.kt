@@ -17,6 +17,7 @@ data class CommonArticle(
     val label: String?,
     val description: String?,
     val author: String?,
+    val category: String?,
     val imageDescription: String?,
     val mediaCount: Int?,
     val publishedTime: String?,

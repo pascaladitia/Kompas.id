@@ -17,9 +17,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
+import com.pascal.kompasid.domain.mapper.toCommonArticle
 import com.pascal.kompasid.domain.model.BreakingNews
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 fun LazyListScope.homeBreakingNews(
@@ -29,6 +31,9 @@ fun LazyListScope.homeBreakingNews(
     if (item == null) return
 
     item {
+        val event = LocalHomeEvent.current
+        val article = item.toCommonArticle()
+
         Column(
             modifier = modifier
                 .padding(top = 16.dp)
@@ -48,7 +53,11 @@ fun LazyListScope.homeBreakingNews(
                 desc = item.subheadline,
                 time = item.publishedTime,
                 isCenter = true,
-                showDivider = false
+                showDivider = false,
+                onItemClick = { event.onDetail(article)},
+                onBookmarkClick = { event.onBookMark(article) },
+                onAudioClick = { event.onAudio(article.audio) },
+                onShareClick = { event.onShare(article.share) }
             )
 
             DynamicAsyncImage(
@@ -65,9 +74,15 @@ fun LazyListScope.homeBreakingNews(
     }
 
     items(item.articles) { item ->
+        val event = LocalHomeEvent.current
+
         ArticleComponent(
             title = item.title,
-            time = item.publishedTime
+            time = item.publishedTime,
+            onItemClick = { event.onDetail(item)},
+            onBookmarkClick = { event.onBookMark(item) },
+            onAudioClick = { event.onAudio(item.audio) },
+            onShareClick = { event.onShare(item.share) }
         )
     }
 }

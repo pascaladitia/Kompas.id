@@ -37,6 +37,7 @@ import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
@@ -92,6 +93,8 @@ fun VideosArticlesItem(
     modifier: Modifier = Modifier,
     item: CommonArticle
 ) {
+    val event = LocalHomeEvent.current
+
     Column(
         modifier = modifier.width(380.dp)
     ) {
@@ -142,7 +145,11 @@ fun VideosArticlesItem(
             title = item.title,
             desc = item.description,
             time = item.publishedTime,
-            showDivider = false
+            showDivider = false,
+            onItemClick = { event.onDetail(item)},
+            onBookmarkClick = { event.onBookMark(item) },
+            onAudioClick = { event.onAudio(item.audio) },
+            onShareClick = { event.onShare(item.share) }
         )
     }
 }

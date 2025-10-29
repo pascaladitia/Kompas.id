@@ -1,5 +1,6 @@
 package com.pascal.kompasid.ui.screen.home.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +26,7 @@ import com.pascal.kompasid.ui.component.screenUtils.TopicsSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleTimeline
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 fun LazyListScope.homeLiveReport(
@@ -34,10 +36,13 @@ fun LazyListScope.homeLiveReport(
     if (item == null) return
 
     item {
+        val event = LocalHomeEvent.current
+
         Column(
             modifier = modifier
                 .padding(vertical = 16.dp)
                 .fillMaxWidth()
+                .clickable { event.onDetail(item.mainArticle) }
         ) {
             Box {
                 DynamicAsyncImage(
@@ -89,11 +94,14 @@ fun LazyListScope.homeLiveReport(
     }
 
     itemsIndexed(item.relatedArticles) { index, article ->
+        val event = LocalHomeEvent.current
+
         ArticleTimeline(
             modifier = Modifier.padding(horizontal = 16.dp),
             time = article.publishedTime.orEmpty(),
-            title = article.title.orEmpty(),
-            showDot = index != item.relatedArticles.lastIndex
+            title = article.title,
+            showDot = index != item.relatedArticles.lastIndex,
+            onDetail = { event.onDetail(article) }
         )
     }
 
@@ -105,9 +113,15 @@ fun LazyListScope.homeLiveReport(
     }
 
     items(item.featuredArticles) { item ->
+        val event = LocalHomeEvent.current
+
         ArticleComponent(
             image = item.image,
-            title = item.title
+            title = item.title,
+            onItemClick = { event.onDetail(item)},
+            onBookmarkClick = { event.onBookMark(item) },
+            onAudioClick = { event.onAudio(item.audio) },
+            onShareClick = { event.onShare(item.share) }
         )
     }
 }

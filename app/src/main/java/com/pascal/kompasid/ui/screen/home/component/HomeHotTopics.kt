@@ -34,6 +34,7 @@ import com.pascal.kompasid.R
 import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 fun LazyListScope.homeHotTopics(
@@ -66,9 +67,12 @@ fun LazyListScope.homeHotTopics(
     }
 
     items(item.topics) { item ->
+        val event = LocalHomeEvent.current
+
         HotTopicsItem(
             image = item.image,
-            label = item.title
+            label = item.title,
+            onClick = { event.onDetail(item) }
         )
     }
 

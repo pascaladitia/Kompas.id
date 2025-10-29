@@ -24,6 +24,7 @@ import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
@@ -32,6 +33,8 @@ fun HomeBriefArticles(
     item: CommonSection? = null
 ) {
     if (item == null) return
+
+    val event = LocalHomeEvent.current
 
     Column(
         modifier = modifier.fillMaxWidth()
@@ -94,7 +97,11 @@ fun HomeBriefArticles(
                 title = firstItem.title,
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
-                showDivider = false
+                showDivider = false,
+                onItemClick = { event.onDetail(firstItem)},
+                onBookmarkClick = { event.onBookMark(firstItem) },
+                onAudioClick = { event.onAudio(firstItem.audio) },
+                onShareClick = { event.onShare(firstItem.share) }
             )
         }
     }

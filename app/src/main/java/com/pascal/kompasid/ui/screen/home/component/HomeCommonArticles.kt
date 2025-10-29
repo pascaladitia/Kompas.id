@@ -23,6 +23,7 @@ import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
@@ -31,6 +32,8 @@ fun HomeCommonArticles(
     item: CommonSection? = null
 ) {
     if (item == null) return
+
+    val event = LocalHomeEvent.current
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -42,7 +45,7 @@ fun HomeCommonArticles(
         )
 
         val firstItem = item.articles.firstOrNull()
-        if (firstItem != null) {
+        firstItem?.let {
 
             if (item.section.isNotBlank()) {
                 ArticleSection(
@@ -81,7 +84,11 @@ fun HomeCommonArticles(
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
                 author = firstItem.author,
-                showDivider = false
+                showDivider = false,
+                onItemClick = { event.onDetail(firstItem)},
+                onBookmarkClick = { event.onBookMark(firstItem) },
+                onAudioClick = { event.onAudio(firstItem.audio) },
+                onShareClick = { event.onShare(firstItem.share) }
             )
         }
 
@@ -91,7 +98,11 @@ fun HomeCommonArticles(
                 title = article.title,
                 time = article.publishedTime,
                 label = article.label,
-                author = article.author
+                author = article.author,
+                onItemClick = { event.onDetail(article)},
+                onBookmarkClick = { event.onBookMark(article) },
+                onAudioClick = { event.onAudio(article.audio) },
+                onShareClick = { event.onShare(article.share) }
             )
         }
 

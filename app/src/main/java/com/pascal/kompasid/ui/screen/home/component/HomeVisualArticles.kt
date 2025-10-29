@@ -1,6 +1,7 @@
 package com.pascal.kompasid.ui.screen.home.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import com.pascal.kompasid.domain.model.CommonSection
 import com.pascal.kompasid.ui.component.screenUtils.ArticleSection
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.TextBorderComponent
+import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 import com.pascal.kompasid.ui.theme.Yellow500
 
@@ -42,6 +44,8 @@ fun HomeVisualArticles(
     item: CommonSection? = null
 ) {
     if (item == null) return
+
+    val event = LocalHomeEvent.current
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -65,7 +69,12 @@ fun HomeVisualArticles(
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
             items(item.articles) {
-                VisualArticlesItem(item = it)
+                VisualArticlesItem(
+                    item = it,
+                    onClick = {
+                        event.onDetail(it)
+                    }
+                )
             }
         }
 
@@ -82,13 +91,15 @@ fun HomeVisualArticles(
 @Composable
 fun VisualArticlesItem(
     modifier: Modifier = Modifier,
-    item: CommonArticle
+    item: CommonArticle,
+    onClick: (CommonArticle) -> Unit = {}
 ) {
     Box(
         modifier = modifier
             .width(300.dp)
             .height(380.dp)
             .clip(RoundedCornerShape(12.dp))
+            .clickable { onClick(item) }
     ) {
         DynamicAsyncImage(
             modifier = Modifier.fillMaxSize(),
