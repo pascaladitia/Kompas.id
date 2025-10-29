@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import com.pascal.kompasid.domain.model.CommonArticle
 import com.pascal.kompasid.domain.usecase.local.LocalUseCase
 import com.pascal.kompasid.domain.usecase.news.NewsUseCase
 import com.pascal.kompasid.ui.screen.home.state.HomeUIState
@@ -82,6 +83,23 @@ class HomeViewModel(
                 }
             }.collect { newState ->
                 _uiState.update { newState }
+            }
+        }
+    }
+
+    fun modifyFavorite(context: Context, item: CommonArticle?, isFavorite: Boolean) {
+        viewModelScope.launch {
+            if (item == null) return@launch
+
+            try {
+                if (!isFavorite) {
+                    localUseCase.insertFavorite(item)
+                } else {
+                    localUseCase.deleteFavorite(item)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                showToast(context, "Gagal menambahkan ke favorit")
             }
         }
     }

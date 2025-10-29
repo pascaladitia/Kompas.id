@@ -1,5 +1,6 @@
 package com.pascal.kompasid.domain.mapper
 
+import com.pascal.kompasid.data.local.entity.FavoritesEntity
 import com.pascal.kompasid.data.remote.dtos.AdsBannerResponse
 import com.pascal.kompasid.data.remote.dtos.BreakingNewsResponse
 import com.pascal.kompasid.data.remote.dtos.CommonSectionResponse
@@ -168,3 +169,39 @@ fun BreakingNews.toCommonArticle(): CommonArticle {
         share = "${getSampleShareUrl()}${headline}"
     )
 }
+
+fun FavoritesEntity.toCommonArticle(): CommonArticle {
+    return CommonArticle(
+        isExclusive = this.isExclusive ?: false,
+        image = this.image,
+        title = this.title,
+        label = this.label,
+        description = this.description,
+        author = this.author,
+        category = this.category,
+        imageDescription = this.imageDescription,
+        mediaCount = this.mediaCount,
+        publishedTime = this.publishedTime,
+        audio = this.audio,
+        share = this.share
+    )
+}
+
+fun CommonArticle.toFavoritesEntity(): FavoritesEntity {
+    return FavoritesEntity(
+        isExclusive = this.isExclusive,
+        image = this.image,
+        title = this.title,
+        label = this.label,
+        description = this.description,
+        author = this.author,
+        category = this.category,
+        imageDescription = this.imageDescription,
+        mediaCount = this.mediaCount,
+        publishedTime = this.publishedTime,
+        audio = this.audio,
+        share = this.share
+    )
+}
+
+

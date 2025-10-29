@@ -123,9 +123,10 @@ fun VideosRowItem(
             title = item.title,
             desc = item.description,
             time = item.publishedTime,
+            isFavorite = item.isFavorite,
             showDivider = false,
             onItemClick = { event.onDetail(item)},
-            onBookmarkClick = { event.onBookMark(item) },
+            onBookmarkClick = { event.onBookMark(item, it) },
             onAudioClick = { event.onAudio(item.audio) },
             onShareClick = { event.onShare(item.share) }
         )

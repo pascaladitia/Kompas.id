@@ -24,6 +24,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -100,9 +104,10 @@ fun HomeMultimediaArticles(
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
                 author = firstItem.author,
+                isFavorite = firstItem.isFavorite,
                 showDivider = false,
                 onItemClick = { event.onDetail(firstItem)},
-                onBookmarkClick = { event.onBookMark(firstItem) },
+                onBookmarkClick = { event.onBookMark(firstItem, it) },
                 onAudioClick = { event.onAudio(firstItem.audio) },
                 onShareClick = { event.onShare(firstItem.share) }
             )
@@ -117,13 +122,14 @@ fun HomeMultimediaArticles(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(end = 16.dp)
         ) {
-            items(item.articles.drop(1)) {
+            items(item.articles.drop(1)) { item ->
                 MultimediaArticlesItem(
-                    item = it,
-                    onItemClick = { event.onDetail(it)},
-                    onBookmarkClick = { event.onBookMark(it) },
-                    onAudioClick = { event.onAudio(it.audio) },
-                    onShareClick = { event.onShare(it.share) }
+                    item = item,
+                    isFavorite = item.isFavorite,
+                    onItemClick = { event.onDetail(item)},
+                    onBookmarkClick = { event.onBookMark(item, it) },
+                    onAudioClick = { event.onAudio(item.audio) },
+                    onShareClick = { event.onShare(item.share) }
                 )
             }
         }
@@ -148,11 +154,15 @@ fun HomeMultimediaArticles(
 fun MultimediaArticlesItem(
     modifier: Modifier = Modifier,
     item: CommonArticle,
+    isFavorite: Boolean = false,
     onShareClick: () -> Unit = {},
-    onBookmarkClick: () -> Unit = {},
+    onBookmarkClick: (Boolean) -> Unit = {},
     onAudioClick: () -> Unit = {},
     onItemClick: () -> Unit = {}
 ) {
+    var isFavorite by rememberSaveable { mutableStateOf(isFavorite) }
+    val iconFavorite = if (isFavorite) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark
+
     Column(
         modifier = modifier.width(380.dp)
     ) {
@@ -246,9 +256,12 @@ fun MultimediaArticlesItem(
                 Icon(
                     modifier = Modifier
                         .clip(CircleShape)
-                        .clickable { onBookmarkClick() }
+                        .clickable {
+                            onBookmarkClick(isFavorite)
+                            isFavorite = !isFavorite
+                        }
                         .size(42.dp),
-                    painter = painterResource(R.drawable.ic_bookmark),
+                    painter = painterResource(iconFavorite),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )

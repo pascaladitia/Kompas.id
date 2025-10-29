@@ -52,10 +52,11 @@ fun LazyListScope.homeBreakingNews(
                 title = item.headline,
                 desc = item.subheadline,
                 time = item.publishedTime,
+                isFavorite = article.isFavorite,
                 isCenter = true,
                 showDivider = false,
                 onItemClick = { event.onDetail(article)},
-                onBookmarkClick = { event.onBookMark(article) },
+                onBookmarkClick = { event.onBookMark(article, it) },
                 onAudioClick = { event.onAudio(article.audio) },
                 onShareClick = { event.onShare(article.share) }
             )
@@ -79,8 +80,9 @@ fun LazyListScope.homeBreakingNews(
         ArticleComponent(
             title = item.title,
             time = item.publishedTime,
+            isFavorite = item.isFavorite,
             onItemClick = { event.onDetail(item)},
-            onBookmarkClick = { event.onBookMark(item) },
+            onBookmarkClick = { event.onBookMark(item, it) },
             onAudioClick = { event.onAudio(item.audio) },
             onShareClick = { event.onShare(item.share) }
         )

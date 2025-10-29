@@ -44,6 +44,7 @@ import com.pascal.kompasid.ui.screen.home.component.HomeMultimediaArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeRowArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeVideosArticles
 import com.pascal.kompasid.ui.screen.home.component.HomeVisualArticles
+import com.pascal.kompasid.ui.screen.home.component.PullRefreshComponent
 import com.pascal.kompasid.ui.screen.home.component.homeBreakingNews
 import com.pascal.kompasid.ui.screen.home.component.homeCampaign
 import com.pascal.kompasid.ui.screen.home.component.homeHotTopics
@@ -91,15 +92,22 @@ fun HomeScreen(
             onAudio = {
                 viewModel.playAudioFromUrl(context, it)
             },
-            onBookMark = {
-
+            onBookMark = { item, isFav ->
+                viewModel.modifyFavorite(context, item, isFav)
             },
             onShare = {
                 viewModel.actionShareUrl(context, it)
             }
         )
     ) {
-        HomeContent(uiState = uiState)
+        PullRefreshComponent(
+            onRefresh = {
+                viewModel.loadHomePartOne()
+                viewModel.loadHomePartTwo()
+            }
+        ) {
+            HomeContent(uiState = uiState)
+        }
     }
 }
 

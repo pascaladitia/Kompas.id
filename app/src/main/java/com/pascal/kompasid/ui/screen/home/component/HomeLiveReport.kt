@@ -118,8 +118,9 @@ fun LazyListScope.homeLiveReport(
         ArticleComponent(
             image = item.image,
             title = item.title,
+            isFavorite = item.isFavorite,
             onItemClick = { event.onDetail(item)},
-            onBookmarkClick = { event.onBookMark(item) },
+            onBookmarkClick = { event.onBookMark(item, it) },
             onAudioClick = { event.onAudio(item.audio) },
             onShareClick = { event.onShare(item.share) }
         )

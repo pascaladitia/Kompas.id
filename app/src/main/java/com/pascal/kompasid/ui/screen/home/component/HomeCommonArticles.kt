@@ -84,9 +84,10 @@ fun HomeCommonArticles(
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
                 author = firstItem.author,
+                isFavorite = firstItem.isFavorite,
                 showDivider = false,
                 onItemClick = { event.onDetail(firstItem)},
-                onBookmarkClick = { event.onBookMark(firstItem) },
+                onBookmarkClick = { event.onBookMark(firstItem, it) },
                 onAudioClick = { event.onAudio(firstItem.audio) },
                 onShareClick = { event.onShare(firstItem.share) }
             )
@@ -99,8 +100,9 @@ fun HomeCommonArticles(
                 time = article.publishedTime,
                 label = article.label,
                 author = article.author,
+                isFavorite = article.isFavorite,
                 onItemClick = { event.onDetail(article)},
-                onBookmarkClick = { event.onBookMark(article) },
+                onBookmarkClick = { event.onBookMark(article, it) },
                 onAudioClick = { event.onAudio(article.audio) },
                 onShareClick = { event.onShare(article.share) }
             )

@@ -97,9 +97,10 @@ fun HomeBriefArticles(
                 title = firstItem.title,
                 desc = firstItem.description,
                 time = firstItem.publishedTime,
+                isFavorite = firstItem.isFavorite,
                 showDivider = false,
                 onItemClick = { event.onDetail(firstItem)},
-                onBookmarkClick = { event.onBookMark(firstItem) },
+                onBookmarkClick = { event.onBookMark(firstItem, it) },
                 onAudioClick = { event.onAudio(firstItem.audio) },
                 onShareClick = { event.onShare(firstItem.share) }
             )

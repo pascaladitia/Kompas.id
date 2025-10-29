@@ -17,6 +17,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,13 +46,17 @@ fun ArticleComponent(
     label: String? = null,
     author: String? = null,
     action: Boolean = true,
+    isFavorite: Boolean = false,
     isCenter: Boolean = false,
     showDivider: Boolean = true,
     onShareClick: () -> Unit = {},
-    onBookmarkClick: () -> Unit = {},
+    onBookmarkClick: (Boolean) -> Unit = {},
     onAudioClick: () -> Unit = {},
     onItemClick: () -> Unit = {}
 ) {
+    var isFavorite by rememberSaveable { mutableStateOf(isFavorite) }
+    val iconFavorite = if (isFavorite) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -165,9 +173,12 @@ fun ArticleComponent(
                     Icon(
                         modifier = Modifier
                             .clip(CircleShape)
-                            .clickable { onBookmarkClick() }
+                            .clickable {
+                                onBookmarkClick(isFavorite)
+                                isFavorite = !isFavorite
+                            }
                             .size(42.dp),
-                        painter = painterResource(R.drawable.ic_bookmark),
+                        painter = painterResource(iconFavorite),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )

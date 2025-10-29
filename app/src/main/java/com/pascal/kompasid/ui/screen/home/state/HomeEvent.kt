@@ -9,7 +9,7 @@ val LocalHomeEvent = compositionLocalOf { HomeEvent() }
 @Stable
 data class HomeEvent(
     val onDetail: (CommonArticle?) -> Unit = {},
-    val onBookMark: (CommonArticle?) -> Unit = {},
+    val onBookMark: (CommonArticle?, Boolean) -> Unit = { _, _ -> },
     val onAudio: (String?) -> Unit = {},
     val onShare: (String?) -> Unit = {}
 )

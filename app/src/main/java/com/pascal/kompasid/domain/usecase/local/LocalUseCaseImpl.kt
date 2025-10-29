@@ -1,28 +1,29 @@
 package com.pascal.kompasid.domain.usecase.local
 
-import com.pascal.kompasid.data.local.entity.ProfileEntity
-import com.pascal.kompasid.data.local.repository.LocalRepositoryImpl
-import kotlinx.coroutines.flow.Flow
+import com.pascal.kompasid.data.local.repository.LocalRepository
+import com.pascal.kompasid.domain.mapper.toCommonArticle
+import com.pascal.kompasid.domain.mapper.toFavoritesEntity
+import com.pascal.kompasid.domain.model.CommonArticle
 import org.koin.core.annotation.Single
 
 @Single
 class LocalUseCaseImpl(
-    private val localUseCase: LocalRepositoryImpl,
+    private val repository: LocalRepository,
 ) : LocalUseCase {
-    override fun getProfileById(id: Long): Flow<ProfileEntity?> {
-        TODO("Not yet implemented")
+
+    override suspend fun insertFavorite(entity: CommonArticle) {
+        repository.insertFavorite(entity.toFavoritesEntity())
     }
 
-    override fun getAllProfiles(): Flow<List<ProfileEntity>> {
-        TODO("Not yet implemented")
+    override suspend fun deleteFavorite(entity: CommonArticle) {
+        repository.deleteFavorite(entity.toFavoritesEntity())
     }
 
-    override fun deleteProfileById(item: ProfileEntity): Flow<Unit> {
-        TODO("Not yet implemented")
+    override suspend fun getFavorite(): List<CommonArticle>? {
+        return repository.getFavorite()?.map { it.toCommonArticle() }
     }
 
-    override fun insertProfile(item: ProfileEntity): Flow<Unit> {
-        TODO("Not yet implemented")
+    override suspend fun getFavorite(title: String): Boolean {
+        return repository.getFavorite(title)
     }
-
 }

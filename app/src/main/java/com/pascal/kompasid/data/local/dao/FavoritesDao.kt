@@ -21,8 +21,8 @@ interface FavoritesDao {
     @Query("SELECT * FROM favorite")
     abstract suspend fun getFavoriteMovieList(): List<FavoritesEntity>?
 
-    @Query("SELECT * FROM favorite where id=:id")
-    abstract suspend fun getFavoriteMovie(id:Int): FavoritesEntity?
+    @Query("SELECT * FROM favorite where title=:title")
+    abstract suspend fun getFavoriteMovie(title: String): FavoritesEntity?
 
     @Query("DELETE FROM favorite")
     abstract suspend fun clearFavoritesTable()
