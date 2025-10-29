@@ -1,9 +1,9 @@
 package com.pascal.kompasid.ui.screen.profile.state
 
-import com.pascal.kompasid.domain.model.CommonArticle
+import com.pascal.kompasid.ui.screen.profile.ThemeMode
 
 data class ProfileUIState(
     val isLoading: Boolean = false,
     val error: Pair<Boolean, String> = false to "",
-    val articles: CommonArticle? = null
+    val themeMode: ThemeMode = ThemeMode.SYSTEM
 )

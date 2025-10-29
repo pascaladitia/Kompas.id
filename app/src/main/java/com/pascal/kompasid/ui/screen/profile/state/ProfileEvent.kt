@@ -7,5 +7,6 @@ val LocalProfileEvent = compositionLocalOf { ProfileEvent() }
 
 @Stable
 data class ProfileEvent(
-    val onBookmark: () -> Unit = {}
+    val onBookmark: () -> Unit = {},
+    val onTheme: () -> Unit = {}
 )

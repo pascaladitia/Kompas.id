@@ -1,5 +1,6 @@
 package com.pascal.kompasid.ui.screen.profile
 
+import ProfileThemeBottom
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +29,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,6 +58,20 @@ fun ProfileScreen(
 ) {
     val event = LocalProfileEvent.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    var showThemeSheet by rememberSaveable { mutableStateOf(false) }
+
+    if (showThemeSheet) {
+        ProfileThemeBottom(
+            initialSelection = uiState.themeMode,
+            onApply = { selection ->
+                showThemeSheet = false
+                viewModel.onThemeChanged(selection)
+            },
+            onDismiss = {
+                showThemeSheet = false
+            }
+        )
+    }
 
     if (uiState.isLoading) LoadingScreen()
 
@@ -68,7 +86,8 @@ fun ProfileScreen(
 
     CompositionLocalProvider(
         LocalProfileEvent provides event.copy(
-            onBookmark = onBookMark
+            onBookmark = onBookMark,
+            onTheme = { showThemeSheet = true }
         )
     ) {
         ProfileContent(uiState = uiState)
@@ -127,7 +146,7 @@ fun ProfileContent(
                     icons = Icons.Default.Settings,
                     label = "Pengaturan",
                     desc = "Atur fitur untuk akun Anda.",
-                    onClick = {}
+                    onClick = event.onTheme
                 )
             }
 

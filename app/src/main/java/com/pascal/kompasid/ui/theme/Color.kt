@@ -85,7 +85,7 @@ internal val InverseSurfaceDark = Color(0xFFE0E0E0)
 internal val InverseOnSurfaceDark = Color(0xFF9F9F9F)
 internal val InversePrimaryDark = Color(0xFF80BFFF)
 
-internal val SurfaceDimDark = Color(0xFF0E0E0E)
+internal val SurfaceDimDark = Color(0xFFEC9F2E)
 internal val SurfaceBrightDark = Color(0xFF6B6B6B)
 internal val SurfaceContainerLowestDark = Color(0xFF0A0A0A)
 internal val SurfaceContainerLowDark = Color(0xFF171717)

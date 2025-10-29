@@ -162,4 +162,7 @@ dependencies {
     // Exo
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
+
+    // Datastore
+    implementation(libs.datastore.preferences)
 }
