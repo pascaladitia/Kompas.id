@@ -41,7 +41,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.ChevronDown
 import compose.icons.feathericons.Eye
@@ -453,7 +453,7 @@ fun TextError2(text: AnnotatedString) {
 @Preview(showBackground = true)
 @Composable
 fun FormPreview() {
-    MovieTheme {
+    AppTheme {
         FormComponent(
             title = "Name",
             value = "test",
@@ -465,7 +465,7 @@ fun FormPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FormBasicPreview() {
-    MovieTheme {
+    AppTheme {
         FormBasicComponent(
             title = buildAnnotatedString {
                 append("Nama")
@@ -485,7 +485,7 @@ fun FormBasicPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FormClickedPreview() {
-    MovieTheme {
+    AppTheme {
         FormClickedComponent(
             title = buildAnnotatedString {
                 append("Nama")
@@ -503,7 +503,7 @@ fun FormClickedPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FormEmailPreview() {
-    MovieTheme {
+    AppTheme {
         FormEmailComponent(
             title = "Name",
             hintText = "Masukan nama",
@@ -517,7 +517,7 @@ fun FormEmailPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FormPasswordPreview() {
-    MovieTheme {
+    AppTheme {
         FormPasswordComponent(
             title = "Name",
             hintText = "Masukan nama",

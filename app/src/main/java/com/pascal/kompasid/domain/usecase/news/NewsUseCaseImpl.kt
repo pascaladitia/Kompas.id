@@ -1,0 +1,47 @@
+package com.pascal.kompasid.domain.usecase.news
+
+import com.pascal.kompasid.data.repository.NewsRepository
+import com.pascal.kompasid.domain.mapper.toDomain
+import com.pascal.kompasid.domain.model.AdsBanner
+import com.pascal.kompasid.domain.model.BreakingNews
+import com.pascal.kompasid.domain.model.CommonSection
+import com.pascal.kompasid.domain.model.Dashboard
+import com.pascal.kompasid.domain.model.LiveReport
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import org.koin.core.annotation.Single
+
+@Single
+class NewsUseCaseImpl(
+    private val repository: NewsRepository
+) : NewsUseCase {
+
+    override suspend fun dashboard(): Flow<Dashboard> = flow {
+        emit(repository.dashboard().toDomain())
+    }
+
+    override suspend fun getAdsBanner(): Flow<AdsBanner> = flow {
+        emit(repository.getAdsBanner().toDomain())
+    }
+
+    override suspend fun getIframeCampaign(): Flow<AdsBanner> = flow {
+        emit(repository.getIframeCampaign().toDomain())
+    }
+
+    override suspend fun getBreakingNews(): Flow<BreakingNews> = flow {
+        emit(repository.getBreakingNews().toDomain())
+    }
+
+    override suspend fun getHotTopics(): Flow<CommonSection> = flow {
+        emit(repository.getHotTopics().toDomain())
+    }
+
+    override suspend fun getLiveReport(): Flow<LiveReport> = flow {
+        emit(repository.getLiveReport().toDomain())
+    }
+
+    override suspend fun getAllCommonSections(): Flow<List<CommonSection>> = flow {
+        val sections = repository.getAllCommonSections().map { it.toDomain() }
+        emit(sections)
+    }
+}

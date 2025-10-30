@@ -1,11 +1,11 @@
 package com.pascal.kompasid.domain.usecase.local
 
-import com.pascal.kompasid.data.local.entity.ProfileEntity
-import kotlinx.coroutines.flow.Flow
+import com.pascal.kompasid.domain.model.CommonArticle
 
 interface LocalUseCase {
-    fun getProfileById(id: Long): Flow<ProfileEntity?>
-    fun getAllProfiles(): Flow<List<ProfileEntity>>
-    fun deleteProfileById(item: ProfileEntity): Flow<Unit>
-    fun insertProfile(item: ProfileEntity): Flow<Unit>
+    suspend fun insertFavorite(entity: CommonArticle)
+    suspend fun deleteFavorite(entity: CommonArticle)
+    suspend fun getFavorite(): List<CommonArticle>?
+    suspend fun getFavorite(title: String): Boolean
+    suspend fun clearFavorite()
 }

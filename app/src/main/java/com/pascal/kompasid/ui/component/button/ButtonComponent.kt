@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pascal.kompasid.R
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Home
 
@@ -129,7 +129,7 @@ fun ButtonOutlineComponent(
 @Preview(showBackground = true)
 @Composable
 fun ButtonPreview() {
-    MovieTheme {
+    AppTheme {
         ButtonComponent(text = "Masuk") {}
     }
 }
@@ -137,7 +137,7 @@ fun ButtonPreview() {
 @Preview(showBackground = true)
 @Composable
 fun ButtonOutlinePreview() {
-    MovieTheme {
+    AppTheme {
         ButtonOutlineComponent(text = "Keluar") {}
     }
 }

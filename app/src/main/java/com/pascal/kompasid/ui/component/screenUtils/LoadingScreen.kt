@@ -24,7 +24,7 @@ import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.request.ImageRequest
 import com.pascal.kompasid.R
-import com.pascal.kompasid.ui.theme.MovieTheme
+import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {
@@ -70,7 +70,7 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun LoadingPreview() {
-    MovieTheme {
+    AppTheme {
         LoadingScreen()
     }
 }

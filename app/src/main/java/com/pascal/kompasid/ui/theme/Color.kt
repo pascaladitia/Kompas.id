@@ -2,38 +2,96 @@ package com.pascal.kompasid.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// ==================== Light Colors ====================
+internal val PrimaryLight = Color(0xFF00559A)
+internal val OnPrimaryLight = Color(0xFFFFFFFF)
+internal val PrimaryContainerLight = Color(0xFFFFE0B2)
+internal val OnPrimaryContainerLight = Color(0xFF4E342E)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+internal val SecondaryLight = Color(0x8000559A)
+internal val OnSecondaryLight = Color(0xFFFFFFFF)
+internal val SecondaryContainerLight = Color(0xFFD7CCC8)
+internal val OnSecondaryContainerLight = Color(0xFF3E2723)
 
-val Blue40 = Color(0xFF091C3E)
+internal val TertiaryLight = Color(0xFF00796B)
+internal val OnTertiaryLight = Color(0xFFFFFFFF)
+internal val TertiaryContainerLight = Color(0xFFB2DFDB)
+internal val OnTertiaryContainerLight = Color(0xFF004D40)
 
-val Background = Color(0xFFF8FAFB)
-val BackgroundDark = Color(0x003D3B3B)
+internal val ErrorLight = Color(0xFFD00D12)
+internal val OnErrorLight = Color(0xFFFFFFFF)
+internal val ErrorContainerLight = Color(0xFFFFCDD2)
+internal val OnErrorContainerLight = Color(0xFF410002)
 
-val Neutral500 = Color(0xFF4D4D4D)
-val Neutral200 = Color(0xFF808897)
+internal val BackgroundLight = Color(0xFFFAFAFA)
+internal val OnBackgroundLight = Color(0xFF212121)
 
-val Gray = Color(0xFFE3E8EF)
-val LightGray = Color(0xFFE3E8EF)
+internal val SurfaceLight = Color(0xFFFFFFFF)
+internal val OnSurfaceLight = Color(0xFF363636)
+internal val SurfaceVariantLight = Color(0xFFEAEAEA)
+internal val OnSurfaceVariantLight = Color(0xFF606060)
 
-val Red = Color(0xFFF60404)
-val Red100 = Color(0xFFFFE6E6)
-val Red500 = Color(0xFFD94426)
+internal val OutlineLight = Color(0xFFEAEAEA)
+internal val OutlineVariantLight = Color(0x80151515)
+internal val ScrimLight = Color(0xFF000000)
 
-val Blue = Color(0xFF005FAD)
-val Blue500 = Color(0xFF249ADB)
-val Blue700 = Color(0xFF4333FF)
+internal val InverseSurfaceLight = Color(0xFF2F3131)
+internal val InverseOnSurfaceLight = Color(0xFF7A7A7A)
+internal val InversePrimaryLight = Color(0x800A84FF)
 
-val Orange500 = Color(0xFFD79028)
-val Orange700 = Color(0xFFFF7C44)
+internal val SurfaceDimLight = Color(0xFFEC9F2E)
+internal val SurfaceBrightLight = Color(0xFFB8B8B8)
+internal val SurfaceContainerLowestLight = Color(0xFFFFFFFF)
+internal val SurfaceContainerLowLight = Color(0xFFF7F7F7)
+internal val SurfaceContainerLight = Color(0xFFF3F3F3)
+internal val SurfaceContainerHighLight = Color(0xFFEEEEEE)
+internal val SurfaceContainerHighestLight = Color(0xFFE9E9E9)
 
-val Yellow500 = Color(0xFFFFCB03)
 
-val Brown500 = Color(0xFFBC5643)
+// ==================== Dark Colors ====================
+internal val PrimaryDark = Color(0xFF00559A)
+internal val OnPrimaryDark = Color(0xFFFFFFFF)
+internal val PrimaryContainerDark = Color(0xFF004080)
+internal val OnPrimaryContainerDark = Color(0xFFFFFFFF)
 
+internal val SecondaryDark = Color(0x8000559A)
+internal val OnSecondaryDark = Color(0xFFFFFFFF)
+internal val SecondaryContainerDark = Color(0xFF3E2723)
+internal val OnSecondaryContainerDark = Color(0xFFD7CCC8)
 
+internal val TertiaryDark = Color(0xFF4DB6AC)
+internal val OnTertiaryDark = Color(0xFF00201C)
+internal val TertiaryContainerDark = Color(0xFF004D40)
+internal val OnTertiaryContainerDark = Color(0xFFB2DFDB)
+
+internal val ErrorDark = Color(0xFFEF9A9A)
+internal val OnErrorDark = Color(0xFFD00D12)
+internal val ErrorContainerDark = Color(0xFF8A1C1C)
+internal val OnErrorContainerDark = Color(0xFFFFDAD6)
+
+internal val BackgroundDark = Color(0xFF2D2D2D)
+internal val OnBackgroundDark = Color(0xFFE0E0E0)
+
+internal val SurfaceDark = Color(0xFF121212)
+internal val OnSurfaceDark = Color(0xFFE0E0E0)
+internal val SurfaceVariantDark = Color(0xFF3A3A3A)
+internal val OnSurfaceVariantDark = Color(0xFFB0B0B0)
+
+internal val OutlineDark = Color(0xFF757575)
+internal val OutlineVariantDark = Color(0xFF8A8989)
+internal val ScrimDark = Color(0xFF000000)
+
+internal val InverseSurfaceDark = Color(0xFFE0E0E0)
+internal val InverseOnSurfaceDark = Color(0xFF9F9F9F)
+internal val InversePrimaryDark = Color(0xFF80BFFF)
+
+internal val SurfaceDimDark = Color(0xFFEC9F2E)
+internal val SurfaceBrightDark = Color(0xFF6B6B6B)
+internal val SurfaceContainerLowestDark = Color(0xFF0A0A0A)
+internal val SurfaceContainerLowDark = Color(0xFF171717)
+internal val SurfaceContainerDark = Color(0xFF1F1F1F)
+internal val SurfaceContainerHighDark = Color(0xFF262626)
+internal val SurfaceContainerHighestDark = Color(0xFF2E2E2E)
+
+internal val Yellow500 = Color(0xFFFFC107)
+internal val Green500 = Color(0xFF4CAF50)
