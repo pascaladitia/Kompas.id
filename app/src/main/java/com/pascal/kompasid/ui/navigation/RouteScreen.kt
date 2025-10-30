@@ -5,8 +5,10 @@
 
 package com.pascal.kompasid.ui.navigation
 
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -49,6 +51,8 @@ fun RouteScreen(
         }
     ) { paddingValues ->
         SharedTransitionLayout {
+            val sharedScope: SharedTransitionScope = this
+
             NavHost(
                 modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding()),
                 navController = navController,
@@ -67,7 +71,10 @@ fun RouteScreen(
                     }
                 }
                 composable(route = Screen.HomeScreen.route) {
+                    val animScope: AnimatedVisibilityScope = this
                     HomeScreen(
+                        sharedTransitionScope = sharedScope,
+                        animatedVisibilityScope = animScope,
                         onDetail = {
                             saveToCurrentBackStack(navController, "articles", it)
                             navController.navigate(Screen.DetailScreen.route)
@@ -75,7 +82,10 @@ fun RouteScreen(
                     )
                 }
                 composable(route = Screen.DetailScreen.route) {
+                    val animScope: AnimatedVisibilityScope = this
                     DetailScreen(
+                        sharedTransitionScope = sharedScope,
+                        animatedVisibilityScope = animScope,
                         item = getFromPreviousBackStack(navController, "articles"),
                         onNavBack = {
                             navController.popBackStack()

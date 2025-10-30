@@ -1,6 +1,11 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.pascal.kompasid.ui.screen.detail
 
 import android.content.Context
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
@@ -23,6 +28,18 @@ class DetailViewModel(
 
     private val _uiState = MutableStateFlow(DetailUIState())
     val uiState: StateFlow<DetailUIState> = _uiState.asStateFlow()
+
+    fun setTransition(
+        sharedTransitionScope: SharedTransitionScope,
+        animatedVisibilityScope: AnimatedVisibilityScope
+    ) {
+        _uiState.update {
+            it.copy(
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope
+            )
+        }
+    }
 
     fun setDetailArticle(item: CommonArticle?) {
         viewModelScope.launch {

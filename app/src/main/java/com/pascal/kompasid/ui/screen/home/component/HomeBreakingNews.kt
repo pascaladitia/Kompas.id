@@ -1,5 +1,9 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.pascal.kompasid.ui.screen.home.component
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,13 +25,15 @@ import com.pascal.kompasid.domain.mapper.toCommonArticle
 import com.pascal.kompasid.domain.model.BreakingNews
 import com.pascal.kompasid.ui.component.screenUtils.ArticleComponent
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
+import com.pascal.kompasid.ui.screen.home.state.HomeUIState
 import com.pascal.kompasid.ui.screen.home.state.LocalHomeEvent
 import com.pascal.kompasid.ui.theme.AppTheme
 
 fun LazyListScope.homeBreakingNews(
     modifier: Modifier = Modifier,
-    item: BreakingNews? = null
+    uiState: HomeUIState = HomeUIState()
 ) {
+    val item: BreakingNews? = uiState.breakingNews
     if (item == null) return
 
     item {
@@ -61,16 +67,24 @@ fun LazyListScope.homeBreakingNews(
                 onShareClick = { event.onShare(article.share) }
             )
 
-            DynamicAsyncImage(
-                modifier = Modifier
-                    .padding(bottom = 16.dp)
-                    .fillMaxWidth()
-                    .height(200.dp),
-                imageUrl = item.image,
-                placeholder = painterResource(R.drawable.no_thumbnail),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+            uiState.sharedTransitionScope?.let {
+                with(it) {
+                    DynamicAsyncImage(
+                        modifier = Modifier
+                            .padding(bottom = 16.dp)
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .sharedElement(
+                                state = rememberSharedContentState(article.title),
+                                animatedVisibilityScope = uiState.animatedVisibilityScope!!
+                            ),
+                        imageUrl = item.image,
+                        placeholder = painterResource(R.drawable.no_thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
         }
     }
 

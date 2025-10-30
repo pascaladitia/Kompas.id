@@ -1,5 +1,10 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.pascal.kompasid.ui.screen.home
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -58,6 +63,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     viewModel: HomeViewModel = koinViewModel(),
     onDetail: (CommonArticle?) -> Unit
 ) {
@@ -66,6 +73,7 @@ fun HomeScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
+        viewModel.setTransition(sharedTransitionScope, animatedVisibilityScope)
         viewModel.loadHomePartOne()
         viewModel.loadHomePartTwo()
     }
@@ -201,7 +209,7 @@ fun HomeFirstTab(
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        homeBreakingNews(item = uiState.breakingNews)
+        homeBreakingNews(uiState = uiState)
 
         homeLiveReport(item = uiState.liveReport)
 

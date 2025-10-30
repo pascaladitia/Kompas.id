@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.pascal.kompasid.ui.screen.detail.component
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -8,7 +11,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +22,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
-import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -39,25 +40,37 @@ import com.pascal.kompasid.domain.model.CommonArticle
 import com.pascal.kompasid.domain.model.getSampleArticles
 import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.noRippleClickable
+import com.pascal.kompasid.ui.screen.detail.event.DetailUIState
 import com.pascal.kompasid.ui.theme.AppTheme
 
 @Composable
 fun DetailThumbnail(
     modifier: Modifier = Modifier,
-    item: CommonArticle? = null,
+    uiState: DetailUIState = DetailUIState(),
     onIconClick: () -> Unit = {}
 ) {
+    val item: CommonArticle? = uiState.articles
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(600.dp)
     ) {
-        DynamicAsyncImage(
-            modifier = Modifier.fillMaxSize(),
-            imageUrl = item?.image.orEmpty(),
-            placeholder = painterResource(R.drawable.no_thumbnail),
-            contentScale = ContentScale.Crop
-        )
+        uiState.sharedTransitionScope?.let {
+            with(it) {
+                DynamicAsyncImage(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .sharedElement(
+                            state = rememberSharedContentState(item?.title.orEmpty()),
+                            animatedVisibilityScope = uiState.animatedVisibilityScope!!
+                        ),
+                    imageUrl = item?.image.orEmpty(),
+                    placeholder = painterResource(R.drawable.no_thumbnail),
+                    contentScale = ContentScale.Crop
+                )
+            }
+        }
 
         Column(
             modifier = Modifier
@@ -125,7 +138,9 @@ fun DetailThumbnail(
 private fun DetailThumbnailPreview() {
     AppTheme {
         DetailThumbnail(
-            item = getSampleArticles()
+            uiState = DetailUIState(
+                articles = getSampleArticles()
+            )
         )
     }
 }

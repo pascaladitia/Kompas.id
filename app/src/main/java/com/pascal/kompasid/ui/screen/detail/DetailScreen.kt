@@ -1,5 +1,10 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.pascal.kompasid.ui.screen.detail
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -59,6 +64,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailScreen(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     viewModel: DetailViewModel = koinViewModel(),
     item: CommonArticle? = null,
     onNavBack: () -> Unit
@@ -68,6 +75,7 @@ fun DetailScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
+        viewModel.setTransition(sharedTransitionScope, animatedVisibilityScope)
         viewModel.setDetailArticle(item)
     }
 
@@ -203,7 +211,7 @@ fun DetailContent(
         ) {
             item {
                 DetailThumbnail(
-                    item = uiState.articles,
+                    uiState = uiState,
                     onIconClick = {
                         coroutineScope.launch {
                             listState.animateScrollToItem(1)
