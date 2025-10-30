@@ -23,14 +23,6 @@
 
 This project follows **Clean Architecture principles** to separate concerns and ensure maintainability:  
 
-Presentation Layer (Jetpack Compose)
-│
-▼
-Domain Layer (Use Cases / Business Logic)
-│
-▼
-Data Layer (Repository / Room / Ktor)
-
 - **MVVM Pattern**: ViewModels handle UI state and communicate with Use Cases.  
 - **Repositories**: Abstract data sources (network & local).  
 - **Use Cases**: Encapsulate business logic for a clean separation of concerns.  
