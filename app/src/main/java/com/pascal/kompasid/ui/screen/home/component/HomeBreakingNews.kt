@@ -5,6 +5,7 @@ package com.pascal.kompasid.ui.screen.home.component
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -49,7 +50,8 @@ fun LazyListScope.homeBreakingNews(
             Image(
                 modifier = Modifier
                     .width(100.dp)
-                    .height(40.dp),
+                    .height(40.dp)
+                    .clickable { event.onDetail(article) },
                 painter = painterResource(R.drawable.ic_news),
                 contentDescription = null
             )
@@ -61,7 +63,7 @@ fun LazyListScope.homeBreakingNews(
                 isFavorite = item.isFavorite,
                 isCenter = true,
                 showDivider = false,
-                onItemClick = { event.onDetail(article)},
+                onItemClick = { event.onDetail(article) },
                 onBookmarkClick = { event.onBookMark(article, it) },
                 onAudioClick = { event.onAudio(article.audio) },
                 onShareClick = { event.onShare(article.share) }

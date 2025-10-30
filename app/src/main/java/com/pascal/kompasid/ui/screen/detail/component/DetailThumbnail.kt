@@ -2,6 +2,7 @@
 
 package com.pascal.kompasid.ui.screen.detail.component
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -9,6 +10,8 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -26,7 +29,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,6 +48,7 @@ import com.pascal.kompasid.ui.component.screenUtils.DynamicAsyncImage
 import com.pascal.kompasid.ui.component.screenUtils.noRippleClickable
 import com.pascal.kompasid.ui.screen.detail.event.DetailUIState
 import com.pascal.kompasid.ui.theme.AppTheme
+import kotlinx.coroutines.delay
 
 @Composable
 fun DetailThumbnail(
@@ -50,6 +57,9 @@ fun DetailThumbnail(
     onIconClick: () -> Unit = {}
 ) {
     val item: CommonArticle? = uiState.articles
+    val showBackground = remember { mutableStateOf(false) }
+    val showTitle = remember { mutableStateOf(false) }
+    val showDescription = remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -72,41 +82,62 @@ fun DetailThumbnail(
             }
         }
 
-        Column(
-            modifier = Modifier
-                .background(Color.Black.copy(0.5f))
-                .padding(top = 24.dp, start = 16.dp, end = 16.dp)
-                .fillMaxSize()
-        ) {
-            item?.title?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        color = Color.White
-                    )
-                )
-            }
-
-            item?.description?.let {
-                Text(
-                    modifier = Modifier.padding(top = 16.dp),
-                    text = it,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        color = Color.White,
-                        fontSize = 14.sp
-                    )
-                )
-            }
+        LaunchedEffect(Unit) {
+            showBackground.value = true
+            delay(500)
+            showTitle.value = true
+            delay(500)
+            showDescription.value = true
         }
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 24.dp)
-                .border(1.dp, Color.White, CircleShape)
-                .size(38.dp)
-                .noRippleClickable { onIconClick() }
-        )
+        AnimatedVisibility(
+            visible = showBackground.value,
+            modifier = Modifier.fillMaxSize(),
+            enter = fadeIn(animationSpec = tween(300))
+        ) {
+            Column(
+                modifier = Modifier
+                    .background(Color.Black.copy(0.5f))
+                    .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxSize()
+            ) {
+                AnimatedVisibility(
+                    visible = showTitle.value,
+                    enter = slideInVertically(
+                        initialOffsetY = { -40 },
+                        animationSpec = tween(durationMillis = 400)
+                    ) + fadeIn(animationSpec = tween(durationMillis = 400))
+                ) {
+                    item?.title?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.headlineMedium.copy(
+                                color = Color.White
+                            )
+                        )
+                    }
+                }
+
+                AnimatedVisibility(
+                    visible = showDescription.value,
+                    enter = slideInVertically(
+                        initialOffsetY = { -20 },
+                        animationSpec = tween(durationMillis = 400)
+                    ) + fadeIn(animationSpec = tween(durationMillis = 400))
+                ) {
+                    item?.description?.let {
+                        Text(
+                            modifier = Modifier.padding(top = 16.dp),
+                            text = it,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = Color.White,
+                                fontSize = 14.sp
+                            )
+                        )
+                    }
+                }
+            }
+        }
 
         val infiniteTransition = rememberInfiniteTransition(label = "arrow-bounce")
         val offsetY by infiniteTransition.animateFloat(
@@ -117,6 +148,15 @@ fun DetailThumbnail(
                 repeatMode = RepeatMode.Reverse
             ),
             label = "arrowOffset"
+        )
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 24.dp)
+                .border(1.dp, Color.White, CircleShape)
+                .size(38.dp)
+                .noRippleClickable { onIconClick() }
         )
 
         Icon(
